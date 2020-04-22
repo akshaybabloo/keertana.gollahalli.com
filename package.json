@@ -1,0 +1,19 @@
+{
+  "name": "keertana.gollahalli.com",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/akshaybabloo/keertana.gollahalli.com.git",
+  "author": "Akshay Raj Gollahalli <akshay@gollahalli.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "algoliasearch": "^4.2.0",
+    "firacode": "^3.1.0",
+    "instantsearch.js": "^4.4.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.2.0"
+  }
+}
