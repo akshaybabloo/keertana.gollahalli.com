@@ -20,15 +20,12 @@
 
                 <div class="uk-navbar-item">
                     <ul class="uk-grid-small" uk-grid>
-                        <li>
-                            <a class="uk-icon-button" href="#" uk-icon="icon: trash"></a>
-                        </li>
-                        <li>
-                            <a class="uk-icon-button" href="#" uk-icon="icon: trash"></a>
-                        </li>
-                        <li>
-                            <a class="uk-icon-button" href="#" uk-icon="icon: trash"></a>
-                        </li>
+                        {{ if .Site.Params.linkedin }}
+                            <li>
+                                <a class="uk-icon-button" href="{{ .Site.Params.linkedin }}" uk-icon="icon: linkedin"
+                                   onclick="ga('send', 'event', 'navbar', 'click', 'LinkedIn')"></a>
+                            </li>
+                        {{ end }}
                     </ul>
                 </div>
 
