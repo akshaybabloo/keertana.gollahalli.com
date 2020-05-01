@@ -1,3 +1,7 @@
 baseURL = "http://keertana.gollahalli.com/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Dr. Keertana Gollahalli"
+theme = "Indigo"
+
+[params]
+    linkedin = "https://www.linkedin.com/in/drkeertana/"

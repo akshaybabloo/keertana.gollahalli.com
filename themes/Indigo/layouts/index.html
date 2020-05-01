@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ .Site.Title }}</title>
+    <link rel="stylesheet" href="/css/uikit.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    {{ $sassTemplate := resources.Get "scss/custom.scss" }}
+    {{ $style := $sassTemplate | resources.ExecuteAsTemplate "main.scss" . | resources.ToCSS }}
+    <style>
+        {{ $style.Content | safeCSS }}
+    </style>
+
+</head>
+<body class="uk-height-1-1">
+{{- partial "nav.html" . -}}
+
+<div id="home" class="uk-background-cover uk-overflow-hidden uk-dark uk-flex uk-flex-top" uk-height-viewport="offset-top: true">
+
+    <div class="uk-grid-collapse uk-margin-auto uk-margin-auto-vertical" uk-grid>
+        <div class="uk-width-auto@m">
+            <div class="uk-container">
+                <img src="/img/keertana-long.jpg" alt="{{ .Site.Title }}" width="300" class="uk-border-rounded uk-box-shadow-xlarge">
+            </div>
+        </div>
+
+        <div class="uk-width-expand@m uk-margin-auto-vertical">
+            <div class="uk-container">
+                <h1>{{ .Site.Title }}</h1>
+                {{ .Content }}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/js/uikit.min.js"></script>
+<script src="/js/uikit-icons.min.js"></script>
+</body>
+</html>
