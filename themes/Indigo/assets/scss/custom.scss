@@ -3,3 +3,22 @@ body {
   background: white;
   font-family: 'Roboto', sans-serif;
 }
+
+// Navbar
+
+.uk-navbar-container {
+  &:not(.uk-navbar-transparent){
+    background: white;
+  }
+
+  .uk-icon-button{
+    background: white;
+  }
+}
+
+// Home page
+
+#home {
+  background: #f8f8f8;
+}
+
