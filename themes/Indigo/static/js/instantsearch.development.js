@@ -1,4 +1,4 @@
-/*! InstantSearch.js 4.4.0 | © Algolia, Inc. and contributors; MIT License | https://github.com/algolia/instantsearch.js */
+/*! InstantSearch.js 4.4.1 | © Algolia, Inc. and contributors; MIT License | https://github.com/algolia/instantsearch.js */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -137,36 +137,6 @@
     };
 
     return _setPrototypeOf(o, p);
-  }
-
-  function isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-
-    try {
-      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function _construct(Parent, args, Class) {
-    if (isNativeReflectConstruct()) {
-      _construct = Reflect.construct;
-    } else {
-      _construct = function _construct(Parent, args, Class) {
-        var a = [null];
-        a.push.apply(a, args);
-        var Constructor = Function.bind.apply(Parent, a);
-        var instance = new Constructor();
-        if (Class) _setPrototypeOf(instance, Class.prototype);
-        return instance;
-      };
-    }
-
-    return _construct.apply(null, arguments);
   }
 
   function _objectWithoutPropertiesLoose(source, excluded) {
@@ -6798,7 +6768,7 @@
 
     var arrayLength = Math.round((end - start) / limitStep);
     return _toConsumableArray(Array(arrayLength)).map(function (_, current) {
-      return (start + current) * limitStep;
+      return start + current * limitStep;
     });
   }
 
@@ -7534,7 +7504,7 @@
     };
   };
 
-  var version$1 = '4.4.0';
+  var version$1 = '4.4.1';
 
   var TAG_PLACEHOLDER = {
     highlightPreTag: '__ais-highlight__',
@@ -8646,8 +8616,11 @@
         }
 
         this.writeTimer = window.setTimeout(function () {
-          setWindowTitle(title);
-          window.history.pushState(routeState, title || '', url);
+          if (window.location.href !== url) {
+            setWindowTitle(title);
+            window.history.pushState(routeState, title || '', url);
+          }
+
           _this.writeTimer = undefined;
         }, this.writeDelay);
       }
@@ -8719,12 +8692,8 @@
     return BrowserHistory;
   }();
 
-  function historyRouter () {
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _construct(BrowserHistory, args);
+  function historyRouter (props) {
+    return new BrowserHistory(props);
   }
 
   var walk = function walk(current, callback) {
