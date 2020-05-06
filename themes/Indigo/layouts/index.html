@@ -1,21 +1,8 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ .Site.Title }}</title>
-    <link rel="stylesheet" href="/css/uikit.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
-    {{ $sassTemplate := resources.Get "scss/custom.scss" }}
-    {{ $style := $sassTemplate | resources.ExecuteAsTemplate "main.scss" . | resources.ToCSS }}
-    <style>
-        {{ $style.Content | safeCSS }}
-    </style>
+{{- partial "head.html" . -}}
 
-</head>
 <body class="uk-height-1-1">
 {{- partial "nav.html" . -}}
 
