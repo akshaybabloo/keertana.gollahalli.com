@@ -3,7 +3,7 @@
     {{- partial "head.html" . -}}
     <body>
         {{- partial "nav.html" . -}}
-        <div id="content">
+        <div class="uk-container uk-margin-top" uk-height-viewport="offset-top: true; offset-bottom: true">
         {{- block "main" . }}{{- end }}
         </div>
         {{- partial "footer.html" . -}}
