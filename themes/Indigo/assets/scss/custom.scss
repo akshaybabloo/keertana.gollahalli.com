@@ -1,35 +1,29 @@
-body {
-  color: black;
-  background: white;
-  font-family: 'Roboto', sans-serif;
+.cover-container {
+  max-width: 70em;
 }
 
-// Navbar
+/*
+ * Header
+ */
 
-.uk-navbar-container {
-  &:not(.uk-navbar-transparent){
-    background: white;
-  }
-
-  .uk-icon-button{
-    background: white;
-  }
-
-  border-bottom-style: solid;
-  border-width: thin;
-  border-color: #e5e5e5;
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .5);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
 }
 
-//// Home page
-//
-//#home {
-//  background: #f8f8f8;
-//}
-
-.uk-logo {
-  fill: black !important;
-  stroke: black !important;
-  color: black !important;
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
 }
 
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
 
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #fff;
+}

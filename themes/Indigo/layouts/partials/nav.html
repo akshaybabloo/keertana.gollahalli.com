@@ -1,38 +1,10 @@
-<nav class="uk-navbar-container">
-    <div class="uk-container uk-container-expand">
-        <div class="uk-navbar">
-            <div class="uk-navbar-left">
+<header class="d-flex justify-content-center py-3 mb-4 border-bottom">
 
-                <a class="uk-navbar-item uk-logo" href="#">
-                    <img src="/img/logo.svg" alt="{{ .Site.Title }}" width="150" uk-svg>
-                </a>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        {{ range .Site.Menus.main }}
+<!--        if active use link-secondary-->
+            <li><a href="{{ .URL }}" class="nav-link px-2 link-dark">{{ .Name }}</a></li>
+        {{ end }}
+    </ul>
 
-            </div>
-            <div class="uk-navbar-center">
-
-                <ul class="uk-navbar-nav">
-                    <li class="uk-active"><a href="/">Home</a></li>
-
-                    {{ range .Site.Menus.main }}
-                        <li class="uk-active"><a href="{{ .URL }}">{{ .Name }}</a></li>
-                    {{ end }}
-                </ul>
-
-            </div>
-            <div class="uk-navbar-right">
-
-                <div class="uk-navbar-item">
-                    <ul class="uk-grid-small" uk-grid>
-                        {{ if .Site.Params.linkedin }}
-                            <li>
-                                <a class="uk-icon-button" href="{{ .Site.Params.linkedin }}" uk-icon="icon: linkedin"
-                                   onclick="ga('send', 'event', 'navbar', 'click', 'LinkedIn')"></a>
-                            </li>
-                        {{ end }}
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</nav>
+</header>
