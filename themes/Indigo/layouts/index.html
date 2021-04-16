@@ -3,9 +3,9 @@
 
 {{- partial "head.html" . -}}
 
-<body class="d-flex h-100 text-center">
+<body class="d-flex h-100 text-center" style="background: #000000">
 
-<div id="home" class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<div id="home" class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column text-white">
 
     <header class="mb-auto">
         <div>
@@ -19,21 +19,21 @@
 
     </header>
 
-    <main class="px-3">
+    <main class="px-1">
         <div class="row">
-            <div class="col">
-                <img src="/img/keertana-long.jpg" alt="{{ .Site.Title }}" width="300"
-                     class="img-fluid rounded rounded-circle">
-            </div>
 
             <div class="col align-self-center">
                 <h1>{{ .Site.Title }}</h1>
                 <p>{{.Content}}</p>
                 {{ if .Site.Params.linkedin }}
                 <a href="{{ .Site.Params.linkedin }}"
-                   onclick="ga('send', 'event', 'navbar', 'click', 'LinkedIn')"><span class="fab fa-linkedin-in fa-2x"></span></a>
+                   onclick="ga('send', 'event', 'navbar', 'click', 'LinkedIn')"><span class="fab fa-linkedin-in text-secondary fa-lg"></span></a>
                 {{ end }}
 
+            </div>
+
+            <div class="col">
+                <img src="/img/keertana-mask.png" alt="{{ .Site.Title }}" class="img-fluid">
             </div>
         </div>
     </main>

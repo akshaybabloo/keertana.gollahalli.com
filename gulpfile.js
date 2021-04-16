@@ -12,8 +12,7 @@ const jsFilesToMove = [
     './node_modules/instantsearch.js/dist/instantsearch.development.js',
     './node_modules/algoliasearch/dist/algoliasearch.umd.js',
     './node_modules/instantsearch.js/dist/instantsearch.production.min.js',
-    './node_modules/algoliasearch/dist/algoliasearch.umd.js',
-    './node_modules/bootstrap/dist/js/bootstrap.bundle.js',
+    './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
     './node_modules/@fortawesome/fontawesome-free/js/brands.min.js',
     './node_modules/@fortawesome/fontawesome-free/js/solid.min.js',
     './node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js'
