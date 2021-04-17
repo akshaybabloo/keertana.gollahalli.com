@@ -2,10 +2,11 @@
 <html>
     {{- partial "head.html" . -}}
     <body>
-        {{- partial "header.html" . -}}
-        <div id="content">
+        {{- partial "nav.html" . -}}
+        <div class="uk-container uk-margin-top" uk-height-viewport="offset-top: true; offset-bottom: true">
         {{- block "main" . }}{{- end }}
         </div>
         {{- partial "footer.html" . -}}
+        {{- partial "scripts.html" . -}}
     </body>
 </html>
