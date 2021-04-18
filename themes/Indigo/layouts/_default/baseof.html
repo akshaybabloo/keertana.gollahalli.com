@@ -3,9 +3,9 @@
     {{- partial "head.html" . -}}
     <body>
         {{- partial "nav.html" . -}}
-        <div class="uk-container uk-margin-top" uk-height-viewport="offset-top: true; offset-bottom: true">
+        <main class="container-fluid">
         {{- block "main" . }}{{- end }}
-        </div>
+        </main>
         {{- partial "footer.html" . -}}
         {{- partial "scripts.html" . -}}
     </body>
