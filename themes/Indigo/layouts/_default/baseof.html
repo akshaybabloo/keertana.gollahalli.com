@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="h-100">
     {{- partial "head.html" . -}}
-    <body>
+    <body class="d-flex flex-column h-100">
         {{- partial "nav.html" . -}}
-        <div class="uk-container uk-margin-top" uk-height-viewport="offset-top: true; offset-bottom: true">
         {{- block "main" . }}{{- end }}
-        </div>
         {{- partial "footer.html" . -}}
         {{- partial "scripts.html" . -}}
     </body>
