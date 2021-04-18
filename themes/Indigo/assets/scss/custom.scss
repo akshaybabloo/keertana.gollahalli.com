@@ -1,8 +1,22 @@
-
 body {
   background-image: url("/img/bg-4.png");
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
   background-color: #000000;
+}
+
+.bg-blur {
+  background: rgb(18, 18, 18);
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .bg-blur {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(18, 18, 18, 0.5);
+  }
+  .warning {
+    display: none;
+  }
 }
