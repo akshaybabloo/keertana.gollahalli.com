@@ -1,10 +1,23 @@
-<header class="d-flex justify-content-center py-3 mb-4 border-bottom">
+<header>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-blur" aria-label="Navigation bar">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                    aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        {{ range .Site.Menus.main }}
-<!--        if active use link-secondary-->
-            <li><a href="{{ .URL }}" class="nav-link px-2 link-dark">{{ .Name }}</a></li>
-        {{ end }}
-    </ul>
-
+            <div class="collapse navbar-collapse justify-content-md-center" id="navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    {{ range .Site.Menus.main }}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ .URL }}">{{ .Name }}</a>
+                        </li>
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+    </nav>
 </header>
