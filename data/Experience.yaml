@@ -1,0 +1,38 @@
+Experience:
+  - title: "Dental Assistant"
+    current: true
+    where: "Endodontic Solutions"
+    location: "Auckland, New Zealand"
+    from: "2020-09-01"
+    to: "Present"
+    description:
+      - "Assisting Dr. Hani Naoum in a shared role for various chairside specialist endodontic procedures."
+      - "Assisting Dr. Hani Naoum with endodontic procedures performed and monitoring of patients under IV sedation."
+
+  - title: "Dental Assistant"
+    current: false
+    where: "Lumino City Dental at Quay Park"
+    location: "Auckland, New Zealand"
+    from: "2020-02-01"
+    to: "2020-09-01"
+    description:
+      - "Assisting Dr. Mark Taylor with various chair-side dental procedures including Digital Smile Design (DSD) cases."
+      - "Assisting Dr. Mark Taylor with treatments performed and monitoring of patients under IV Sedation."
+
+  - title: "Dental Intern"
+    current: false
+    where: "Thumbay Medical and Dental Speciality Centre"
+    location: "Sharjah, United Arab Emirates"
+    from: "2018-04-01"
+    to: "2018-09-01"
+    description:
+      - "Patient Management, including Diagnosis, Treatment planning and Treatment delivery (performing various restorative, surgical and non-surgical periodontal, surgical and non-surgical extraction procedures)."
+
+  - title: "Dental Intern"
+    current: false
+    where: "Thumbay Hospital"
+    location: "Ajman, United Arab Emirates"
+    from: "2018-04-01"
+    to: "2018-09-01"
+    description:
+      - "Patient Management, including Diagnosis, Treatment planning and Treatment delivery (performing various endodontic, orthodontic, pediatric, fixed and removable procedures)."

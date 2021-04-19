@@ -44,9 +44,7 @@
 
 
     {{ $sassTemplate := resources.Get "scss/custom.scss" }}
-    {{ $style := $sassTemplate | resources.ExecuteAsTemplate "main.scss" . | resources.ToCSS }}
-    <style>
-        {{ $style.Content | safeCSS }}
-    </style>
+    {{ $style := $sassTemplate | resources.ExecuteAsTemplate "main.scss" . | resources.ToCSS | resources.Minify }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}">
 
 </head>
