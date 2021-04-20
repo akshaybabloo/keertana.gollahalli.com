@@ -1,3 +1,21 @@
 {{ define "main" }}
-
+    <main class="container rounded-3 bg-dark text-white my-5 p-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{.Title}}</h1>
+            </div>
+        </div>
+    {{ if .Params.images }}
+        <div class="row">
+            <div class="col-md-4 px-0 mx-auto">
+                <img src="{{ index .Params.images 0 }}" class="img-fluid" height="100" alt="{{.Title}}">
+            </div>
+        </div>
+    {{end}}
+        <div class="row">
+            <div class="col-md-12">
+                <p class="lh-base">{{.Content}}</p>
+            </div>
+        </div>
+    </main>
 {{ end }}
