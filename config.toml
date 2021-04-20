@@ -3,6 +3,25 @@ languageCode = "en-us"
 title = "Dr. Keertana Gollahalli"
 theme = "Indigo"
 
+pygmentsCodeFences = true
+enableRobotsTXT = true
+enableEmoji = true
+
+[markup]
+    [markup.highlight]
+    style = "dracula"
+
+[outputFormats]
+    [outputFormats.searchindex]
+    mediaType= "application/json"
+    baseName= "searchindex"
+    isPlainText= true
+
+[outputs]
+    home = ["HTML", "RSS", "AMP", "searchindex"]
+    page = ["HTML", "RSS", "AMP"]
+    section = ["HTML", "RSS", "AMP"]
+
 [params]
     linkedin = "https://www.linkedin.com/in/drkeertana/"
     photo = "keertana.JPG"

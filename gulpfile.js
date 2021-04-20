@@ -15,7 +15,8 @@ const jsFilesToMove = [
     './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
     './node_modules/@fortawesome/fontawesome-free/js/brands.min.js',
     './node_modules/@fortawesome/fontawesome-free/js/solid.min.js',
-    './node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js'
+    './node_modules/@fortawesome/fontawesome-free/js/fontawesome.min.js',
+    './node_modules/masonry-layout/dist/masonry.pkgd.min.js',
 ];
 const fontFilesToMove = [
     './node_modules/firacode/distr/woff/FiraCode-Regular.woff',
