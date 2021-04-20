@@ -1,3 +1,25 @@
 {{ define "main" }}
+    <main class="container rounded-3 bg-dark text-white my-5 p-4 h-100">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
 
+            {{ range (.Paginate (.Pages.GroupByPublishDate "2006")).PageGroups }}
+                {{ range $index, $element := .Pages }}
+                    <div class="col">
+                        <div class="card shadow bg-primary">
+                            {{ if .Params.images }}
+                                <img src="{{ index .Params.images 0 }}" class="card-img-top" alt="{{.Title}}">
+                            {{end}}
+                            <div class="card-body">
+                                <h5 class="card-title">{{.Title}}</h5>
+                                <p class="card-text">{{.Description}}</p>
+                                <a href="{{.Permalink}}" class="btn btn-outline-info">Read more -></a>
+                            </div>
+                        </div>
+                    </div>
+                {{end}}
+            {{end}}
+            {{ partial "pagination.html" . }}
+
+        </div>
+    </main>
 {{ end }}
