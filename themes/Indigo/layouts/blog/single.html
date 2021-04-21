@@ -3,15 +3,18 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>{{.Title}}</h1>
+                <p><small class="text-muted"><time datetime="{{.PublishDate}}" itemprop="datePublished">{{.PublishDate.Format "January 2, 2006"}}</time> &bullet; {{ range .Params.tags }}
+                            <a class="link-light" href="{{ `/tags/` | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{ end }}
+                        &bullet; {{ .ReadingTime }} minutes to read</small></p>
             </div>
         </div>
-    {{ if .Params.images }}
-        <div class="row">
-            <div class="col-md-4 px-0 mx-auto">
-                <img src="{{ index .Params.images 0 }}" class="img-fluid" height="100" alt="{{.Title}}">
+        {{ if .Params.images }}
+            <div class="row">
+                <div class="col-md-4 px-0 mx-auto">
+                    <img src="{{ index .Params.images 0 }}" class="img-fluid" height="100" alt="{{.Title}}">
+                </div>
             </div>
-        </div>
-    {{end}}
+        {{end}}
         <div class="row">
             <div class="col-md-12">
                 <p class="lh-base">{{.Content}}</p>
