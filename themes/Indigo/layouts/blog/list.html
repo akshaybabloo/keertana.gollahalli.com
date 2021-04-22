@@ -1,5 +1,5 @@
 {{ define "main" }}
-    <main class="container rounded-3 bg-dark text-white my-5 p-4 h-100">
+    <main class="container rounded-sm-3 bg-dark text-white my-5 p-4 h-100">
         <div class="row row-cols-1 row-cols-md-4 g-4">
 
             {{ range (.Paginate (.Pages.GroupByPublishDate "2006")).PageGroups }}
