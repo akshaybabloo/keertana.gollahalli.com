@@ -1,0 +1,47 @@
+baseURL: 'https://keertana.gollahalli.com/'
+languageCode: 'en-us'
+title: 'Keertana Gollahalli'
+theme: 'Indigo'
+
+pygmentsCodeFences: true
+enableRobotsTXT: true
+enableEmoji: true
+
+markup:
+  highlight:
+    style: 'dracula'
+
+outputFormats:
+  searchindex:
+    mediaType: 'application/json'
+    baseName: 'searchindex'
+    isPlainText: true
+
+outputs:
+  home:
+    - 'HTML'
+    - 'RSS'
+    - 'AMP'
+    - 'searchindex'
+  page:
+    - 'HTML'
+    - 'RSS'
+    - 'AMP'
+  section:
+    - 'HTML'
+    - 'RSS'
+    - 'AMP'
+
+params:
+
+  linkedin: 'https://www.linkedin.com/in/drkeertana/'
+  photo: '/img/keertana-photo.jpeg'
+  email: 'keertana@gollahalli.com'
+  briefDescription: 'Hi! My name is Keertana, and I am just your friendly neighbourhood Dentist (or maybe slightly far away, at the end of the world)'
+  author:
+    city: 'Auckland'
+    country: 'New Zealand'
+    jobTitle: 'Dental Assistant'
+    firstName: 'Keertana'
+    lastName: 'Gollahalli'
+    prefix: 'Dr'
