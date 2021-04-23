@@ -1,0 +1,31 @@
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "publisher": {
+      "@type": "Person",
+      "email": "mailto:{{.Site.Params.email}}",
+        "image": {{.Site.Params.photo | absURL | jsonify | safeJS}},
+        "honorificPrefix": "{{ .Site.Params.author.prefix }}",
+        "name": "{{ .Site.Params.author.firstName }} {{ .Site.Params.author.lastName }}",
+        "jobTitle": "{{ .Site.Params.author.jobTitle }}",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "{{ .Site.Params.author.city }}",
+            "addressCountry": "{{ .Site.Params.author.country }}"
+        }
+    },
+    "url": {{.Site.BaseURL | absURL | jsonify | safeJS}},
+    "image": {
+      "@type": "ImageObject",
+      "url": {{.Site.Params.photo | absURL | jsonify | safeJS}},
+      "width": 2709,
+      "height": 938
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {{.Site.BaseURL | absURL | jsonify | safeJS}}
+    },
+    "description": "{{ .Site.Params.briefdescription }}"
+  }
+</script>
