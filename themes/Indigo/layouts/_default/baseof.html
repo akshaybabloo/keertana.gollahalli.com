@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
+<head>
     {{- partial "head.html" . -}}
-    <body class="d-flex flex-column h-100">
-        {{- partial "nav.html" . -}}
-        {{- block "main" . }}{{- end }}
-        {{- partial "footer.html" . -}}
-        {{- partial "scripts.html" . -}}
-    </body>
+    {{- block "head" . }}{{- end }}
+</head>
+<body class="d-flex flex-column h-100">
+{{- partial "nav.html" . -}}
+{{- block "main" . }}{{- end }}
+{{- partial "footer.html" . -}}
+{{- partial "scripts.html" . -}}
+</body>
 </html>
