@@ -47,4 +47,8 @@
     {{ $style := $sassTemplate | resources.ExecuteAsTemplate "main.scss" . | resources.ToCSS | resources.Minify }}
     <link rel="stylesheet" href="{{ $style.Permalink }}">
 
+    {{if .IsHome }}
+        {{partial "schema/person.html" .}}
+    {{end}}
+
 </head>

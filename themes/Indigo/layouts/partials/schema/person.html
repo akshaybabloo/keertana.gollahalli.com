@@ -1,0 +1,16 @@
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "email": "mailto:{{.Site.Params.email}}",
+        "image": {{.Site.Params.photo | absURL | jsonify | safeJS}},
+        "honorificPrefix": "{{ .Site.Params.author.prefix }}",
+        "name": "{{ .Site.Params.author.firstName }} {{ .Site.Params.author.lastName }}",
+        "jobTitle": "{{ .Site.Params.author.jobTitle }}",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "{{ .Site.Params.author.city }}",
+            "addressCountry": "{{ .Site.Params.author.country }}"
+        }
+    }
+</script>
