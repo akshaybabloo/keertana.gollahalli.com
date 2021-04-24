@@ -30,6 +30,6 @@
             "@type": "WebPage",
             "@id": {{.Site.BaseURL | absURL | jsonify | safeJS}}
         },
-        "description": "{{ .Site.Params.briefdescription }}"
+        "description": "{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}"
     }
 </script>
