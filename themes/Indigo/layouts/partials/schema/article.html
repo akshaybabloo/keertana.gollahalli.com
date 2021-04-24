@@ -1,0 +1,59 @@
+{{- $userImage := resources.Get "img/keertana-photo.jpeg" -}}
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "publisher": {
+            "@type": "Person",
+            "email": "mailto:{{.Site.Params.email}}",
+            "image": {{$userImage.Permalink}},
+            "honorificPrefix": "{{ .Site.Params.author.prefix }}",
+            "name": "{{ .Site.Params.author.firstName }} {{ .Site.Params.author.lastName }}",
+            "jobTitle": "{{ .Site.Params.author.jobTitle }}",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "{{ .Site.Params.author.city }}",
+                "addressCountry": "{{ .Site.Params.author.country }}"
+            },
+            "sameAs": [
+                {{.Site.Params.linkedIn}}
+            ]
+        },
+        "author": {
+            "@type": "Person",
+            "email": "mailto:{{.Site.Params.email}}",
+            "image": {{$userImage.Permalink}},
+            "honorificPrefix": "{{ .Site.Params.author.prefix }}",
+            "name": "{{ .Site.Params.author.firstName }} {{ .Site.Params.author.lastName }}",
+            "jobTitle": "{{ .Site.Params.author.jobTitle }}",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "{{ .Site.Params.author.city }}",
+                "addressCountry": "{{ .Site.Params.author.country }}"
+            },
+            "sameAs": [
+                {{.Site.Params.linkedIn}}
+            ],
+            "url": {{.Site.BaseURL}}
+        },
+        "headline": "{{.Title}}",
+        "url": {{ .Permalink | jsonify | safeJS }},
+        "datePublished": {{ .PublishDate.Format "2006-01-02T15:04:05-0700" | safeHTML}},
+        {{ if not (eq .Lastmod .Date) -}}
+        "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05-0700" | safeHTML}},
+        {{- end -}}
+        "image": {
+            {{ $image := resources.Get (index .Params.images 0) -}}
+            "@type": "ImageObject",
+            "url": {{$image.Permalink}},
+            "width": {{$image.Width}},
+            "height": {{$image.Height}}
+        },
+        "keywords": {{.Params.tags}},
+        "description": "{{.Description}}",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": {{ printf "%s%s" (.Site.BaseURL | absURL) "blog" }}
+        }
+    }
+</script>
