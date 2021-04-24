@@ -19,7 +19,7 @@
                 {{.Site.Params.linkedIn}}
             ]
         },
-        "url": {{.Site.BaseURL | absURL | jsonify | safeJS}},
+        "url": {{.Permalink}},
         "image": {
             "@type": "ImageObject",
             "url": {{$image.RelPermalink | absURL}},
