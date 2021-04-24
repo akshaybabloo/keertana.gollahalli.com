@@ -1,0 +1,35 @@
+{{- $image := resources.Get "img/keertana-photo.jpeg" -}}
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "publisher": {
+            "@type": "Person",
+            "email": "mailto:{{.Site.Params.email}}",
+            "image": {{$image.RelPermalink | absURL}},
+            "honorificPrefix": "{{ .Site.Params.author.prefix }}",
+            "name": "{{ .Site.Params.author.firstName }} {{ .Site.Params.author.lastName }}",
+            "jobTitle": "{{ .Site.Params.author.jobTitle }}",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "{{ .Site.Params.author.city }}",
+                "addressCountry": "{{ .Site.Params.author.country }}"
+            },
+            "sameAs": [
+                {{.Site.Params.linkedIn}}
+            ]
+        },
+        "url": {{.Site.BaseURL | absURL | jsonify | safeJS}},
+        "image": {
+            "@type": "ImageObject",
+            "url": {{$image.RelPermalink | absURL}},
+            "width":{{$image.Width}},
+            "height":{{$image.Height}}
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": {{.Site.BaseURL | absURL | jsonify | safeJS}}
+        },
+        "description": "{{ .Site.Params.briefdescription }}"
+    }
+</script>

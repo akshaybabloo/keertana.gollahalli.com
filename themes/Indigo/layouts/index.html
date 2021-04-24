@@ -12,12 +12,12 @@
         <div class="col-md">
             <div class="text-center p-lg-5">
                 <h1 class="fw-bolder">Dr KEERTANA GOLLAHALLI</h1>
-                <p>{{.Content}}</p>
+                <p>{{.Site.Params.briefDescription}}</p>
                 <p><a href="{{.Site.Params.linkedin}}" class="text-white"><span class="fab fa-linkedin fa-2x"></span></a></p>
             </div>
         </div>
         <div class="col-md-auto text-center p-0">
-            <img src="/img/keertana-photo.jpeg" class="img-fluid rounded-3 float-lg-end" width="400"
+            <img src="{{.Site.Params.photo}}" class="img-fluid rounded-3 float-lg-end" width="400"
                  alt="Dr Keertana">
         </div>
     </div>
