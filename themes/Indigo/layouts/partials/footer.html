@@ -1,7 +1,7 @@
 <footer class="container-fluid mt-auto bg-blur py-3">
     <div class="container">
         <div class="text-center text-muted">
-            2020 &copy; <img src="/img/logo.svg" alt="{{.Site.Params.title}}" width="150" class="img-fluid">
+            2020 &copy; {{ (resources.Get "img/logo.svg").Content | safeHTML }}
         </div>
     </div>
 </footer>
