@@ -29,7 +29,7 @@ This is a question most of us are asked during college interviews or by friends 
 
 Even though we live in a time where most of us know what it is, let’s still humour ourselves and understand what dentistry actually is.
 
-It is not just all about fillings and extractions. Dentistry is a science which deals with the prevention, treatment and maintenance of not just your teeth but all the soft and hard structures surrounding it. It involves a study of how to diagnose, treat and prevent any conditions, disorders or diseases of the teeth, gums, mouth and jaw. (allseasonsdentalkent.com/)
+It is not just all about fillings and extractions. Dentistry is a science which deals with the prevention, treatment and maintenance of not just your teeth but all the soft and hard structures surrounding it. It involves a study of how to diagnose, treat and prevent any conditions, disorders or diseases of the teeth, gums, mouth and jaw.
 
 Like any other branch of Medicine, it is rapidly progressing. Dentists are often the first health care professionals to recognize and identify a number of medical conditions including blood disorders, diabetes, hypertension, liver disorders, even cancer. They use a large range of new and advanced technology right from digital scanning to complex screening equipment.
 
