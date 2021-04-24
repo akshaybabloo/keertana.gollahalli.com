@@ -3,6 +3,8 @@ languageCode: 'en-us'
 title: 'Keertana Gollahalli'
 theme: 'Indigo'
 
+googleAnalytics: 'G-VXFCTM73V4'
+disqusShortname: 'keertana'
 pygmentsCodeFences: true
 enableRobotsTXT: true
 enableEmoji: true
@@ -33,11 +35,13 @@ outputs:
     - 'AMP'
 
 params:
-
+  title: 'Dr Keertana Gollahalli'
+  images:
+    - 'img/keertana-photo.jpeg'
   linkedin: 'https://www.linkedin.com/in/drkeertana/'
   photo: '/img/keertana-photo.jpeg'
   email: 'keertana@gollahalli.com'
-  briefDescription: 'Hi! My name is Keertana, and I am just your friendly neighbourhood Dentist (or maybe slightly far away, at the end of the world)'
+  description: 'Hi! My name is Keertana, and I am just your friendly neighbourhood Dentist (or maybe slightly far away, at the end of the world)'
   author:
     city: 'Auckland'
     country: 'New Zealand'

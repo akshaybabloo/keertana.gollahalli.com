@@ -24,5 +24,10 @@
                 <p class="lh-base">{{.Content}}</p>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ template "_internal/disqus.html" . }}
+            </div>
+        </div>
     </main>
 {{ end }}

@@ -53,7 +53,7 @@
         "description": "{{.Description}}",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": {{ printf "%s%s" (.Site.BaseURL | absURL) "blog" }}
+            "@id": {{ .Site.BaseURL }}
         }
     }
 </script>
