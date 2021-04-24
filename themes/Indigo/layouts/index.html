@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col-md-auto text-center p-0">
-            <img src="{{.Site.Params.photo}}" class="img-fluid rounded-3 float-lg-end" width="400"
+            <img src="{{(resources.Get .Site.Params.photo).RelPermalink}}" class="img-fluid rounded-3 float-lg-end" width="400"
                  alt="Dr Keertana">
         </div>
     </div>
