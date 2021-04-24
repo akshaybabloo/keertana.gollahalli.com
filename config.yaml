@@ -49,3 +49,6 @@ params:
     firstName: 'Keertana'
     lastName: 'Gollahalli'
     prefix: 'Dr'
+  seo:
+    noIndexTags: true
+    noIndexCategories: true
