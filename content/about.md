@@ -7,7 +7,7 @@ type: about
 ---
 # About
 
-Hi! My name is Keertana Tipparaju and I am a Dentist. I know, eww right? Who likes to stare into someone’s mouth for a living? But that is what I would like to address on my page. Everything Dentistry! From the why’s and how’s to the what’s and if’s.  
+Hi! My name is Dr Keertana and I am a Dentist. I know, eww right? Who likes to stare into someone’s mouth for a living? But that is what I would like to address on my page. Everything Dentistry! From the why’s and how’s to the what’s and if’s.  
 
 I am currently working as a Dental Assistant (licensing exams take up your life and suck out your soul) with an Endodontist (woah!) and also going through the process of getting my license (surprise, surprise) as a General Dentist in Auckland, New Zealand. I was born in India and spent more than 2 decades in the United Arab Emirates. I graduated as a Doctor of Dental Medicine (DMD) from the College of Dentistry, Gulf Medical University, Ajman, U.A.E.
 
