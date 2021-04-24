@@ -33,7 +33,9 @@ outputs:
     - 'AMP'
 
 params:
-
+  title: 'Dr Keertana Gollahalli'
+  images:
+    - 'img/keertana-photo.jpeg'
   linkedin: 'https://www.linkedin.com/in/drkeertana/'
   photo: '/img/keertana-photo.jpeg'
   email: 'keertana@gollahalli.com'
