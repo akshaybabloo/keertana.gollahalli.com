@@ -3,6 +3,7 @@ languageCode: 'en-us'
 title: 'Keertana Gollahalli'
 theme: 'Indigo'
 
+disqusShortname: 'keertana'
 pygmentsCodeFences: true
 enableRobotsTXT: true
 enableEmoji: true
