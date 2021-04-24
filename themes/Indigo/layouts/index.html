@@ -12,14 +12,15 @@
     <div class="row text-white rounded-3 align-self-center justify-content-center align-items-center shadow-lg bg-blur mx-auto">
         <div class="col-md">
             <div class="text-center p-lg-5">
-                <h1 class="fw-bolder">Dr KEERTANA GOLLAHALLI</h1>
+                <h1 hidden>{{.Site.Params.title}}</h1>
+                <img src="{{ (resources.Get "img/logo.svg").RelPermalink }}" alt="{{.Site.Params.title}}" width="350" class="img-fluid">
                 <p>{{.Site.Params.description}}</p>
                 <p><a href="{{.Site.Params.linkedin}}" class="text-white"><span class="fab fa-linkedin fa-2x"></span></a></p>
             </div>
         </div>
         <div class="col-md-auto text-center p-0">
             <img src="{{(resources.Get .Site.Params.photo).RelPermalink}}" class="img-fluid rounded-3 float-lg-end" width="400"
-                 alt="Dr Keertana">
+                 alt="{{.Site.Title}}">
         </div>
     </div>
 </main>
