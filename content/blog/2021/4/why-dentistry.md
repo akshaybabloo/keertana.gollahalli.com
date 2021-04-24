@@ -20,9 +20,9 @@ author:
 sitemap:
     priority: 0.8
     changeFreq: monthly
-# siteMapImages:
-#   - imageLoc: ""
-#     imageCaption: ""
+siteMapImages:
+  - imageLoc: "/img/blog/why-dentistry/dentistry.jpg"
+    imageCaption: "Why Dentistry?"
 ---
 
 This is a question most of us are asked during college interviews or by friends and family. Before asking anyone else, ask yourself this, why dentistry?
