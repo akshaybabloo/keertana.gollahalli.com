@@ -1,29 +1,28 @@
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ .Site.Title }}</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>{{ .Site.Title }}</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
-    <link rel="shortcut icon" href="/img/icons/favicon.ico"/>
-    <link rel="icon" type="image/x-icon" sizes="16x16 32x32" href="/img/icons/favicon.ico">
-    <link rel="apple-touch-icon" sizes="152x152" href="/img/icons/favicon-152-precomposed.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/img/icons/favicon-144-precomposed.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/img/icons/favicon-120-precomposed.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/img/icons/favicon-114-precomposed.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/favicon-180-precomposed.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/img/icons/favicon-72-precomposed.png">
-    <link rel="apple-touch-icon" sizes="57x57" href="/img/icons/favicon-57.png">
-    <link rel="icon" sizes="32x32" href="/img/icons/favicon-32.png">
-    <link rel="manifest" href="/img/icons/manifest.json">
-    <link rel="icon" sizes="192x192" href="/img/icons/favicon-192.png">
+<link rel="shortcut icon" href="/img/icons/favicon.ico"/>
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32" href="/img/icons/favicon.ico">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/icons/favicon-152-precomposed.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/icons/favicon-144-precomposed.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/icons/favicon-120-precomposed.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/icons/favicon-114-precomposed.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/icons/favicon-180-precomposed.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/icons/favicon-72-precomposed.png">
+<link rel="apple-touch-icon" sizes="57x57" href="/img/icons/favicon-57.png">
+<link rel="icon" sizes="32x32" href="/img/icons/favicon-32.png">
+<link rel="manifest" href="/img/icons/manifest.json">
+<link rel="icon" sizes="192x192" href="/img/icons/favicon-192.png">
 
+{{ $sassTemplate := resources.Get "scss/custom.scss" }}
+{{ $style := $sassTemplate | resources.ExecuteAsTemplate "main.scss" . | resources.ToCSS | resources.Minify }}
+<link rel="stylesheet" href="{{ $style.Permalink }}">
 
-    {{ $sassTemplate := resources.Get "scss/custom.scss" }}
-    {{ $style := $sassTemplate | resources.ExecuteAsTemplate "main.scss" . | resources.ToCSS | resources.Minify }}
-    <link rel="stylesheet" href="{{ $style.Permalink }}">
-
-    {{if .IsHome }}
-        {{partial "schema/website.html" .}}
-    {{end}}
+{{if .IsHome }}
+    {{partial "schema/website.html" .}}
+{{end}}
