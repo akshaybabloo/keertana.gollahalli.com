@@ -1,6 +1,9 @@
-<script src="/js/algoliasearch.umd.js"></script>
+{{/*<script src="/js/algoliasearch.umd.js"></script>*/}}
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/fontawesome.min.js"></script>
 <script src="/js/brands.min.js"></script>
 {{/*<script src="/js/solid.min.js"></script>*/}}
-<script src="/js/instantsearch.production.min.js"></script>
+{{/*<script src="/js/instantsearch.production.min.js"></script>*/}}
+{{ if .Site.Params.cloudflareInsight -}}
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{.Site.Params.cloudflareInsight}}"}'></script>
+{{ end -}}
