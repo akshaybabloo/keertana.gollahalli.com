@@ -9,7 +9,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "algoliasearch": "^4.9.1",
-    "bootstrap": "^5.0.0",
+    "bootstrap": "^5.0.1",
     "firacode": "^5.2.0",
     "instantsearch.js": "^4.22.0",
     "masonry-layout": "^4.2.2"
