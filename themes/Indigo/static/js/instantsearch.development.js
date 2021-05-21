@@ -1,4 +1,4 @@
-/*! InstantSearch.js 4.21.0 | © Algolia, Inc. and contributors; MIT License | https://github.com/algolia/instantsearch.js */
+/*! InstantSearch.js 4.22.0 | © Algolia, Inc. and contributors; MIT License | https://github.com/algolia/instantsearch.js */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -7729,7 +7729,6 @@
         args[_key] = arguments[_key];
       }
 
-      // @ts-ignore-next-line
       return new Promise(function (resolve, reject) {
         if (lastTimeout) {
           clearTimeout(lastTimeout);
@@ -7741,6 +7740,20 @@
         }, wait);
       });
     };
+  }
+
+  function getWidgetAttribute(widget, initOptions) {
+    try {
+      // assume the type to be the correct one, but throw a nice error if it isn't the case
+      var _getWidgetRenderState = widget.getWidgetRenderState(initOptions),
+          widgetParams = _getWidgetRenderState.widgetParams;
+
+      var attribute = 'attribute' in widgetParams ? widgetParams.attribute : widgetParams.attributes[0];
+      if (typeof attribute !== 'string') throw new Error();
+      return attribute;
+    } catch (e) {
+      throw new Error("Could not find the attribute of the widget:\n\n".concat(JSON.stringify(widget), "\n\nPlease check whether the widget's getWidgetRenderState returns widgetParams.attribute correctly."));
+    }
   }
 
   var withUsage = createDocumentationMessageGenerator({
@@ -7773,9 +7786,11 @@
 
   function getLocalWidgetsUiState(widgets, widgetStateOptions) {
     var initialUiState = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-    return widgets.filter(function (widget) {
-      return !isIndexWidget(widget);
-    }).reduce(function (uiState, widget) {
+    return widgets.reduce(function (uiState, widget) {
+      if (isIndexWidget(widget)) {
+        return uiState;
+      }
+
       if (!widget.getWidgetUiState && !widget.getWidgetState) {
         return uiState;
       }
@@ -7831,14 +7846,14 @@
     }, []);
   }
 
-  var index = function index(props) {
-    if (props === undefined || props.indexName === undefined) {
+  var index = function index(widgetParams) {
+    if (widgetParams === undefined || widgetParams.indexName === undefined) {
       throw new Error(withUsage('The `indexName` option is required.'));
     }
 
-    var indexName = props.indexName,
-        _props$indexId = props.indexId,
-        indexId = _props$indexId === void 0 ? indexName : _props$indexId;
+    var indexName = widgetParams.indexName,
+        _widgetParams$indexId = widgetParams.indexId,
+        indexId = _widgetParams$indexId === void 0 ? indexName : _widgetParams$indexId;
     var localWidgets = [];
     var localUiState = {};
     var localInstantSearchInstance = null;
@@ -7951,6 +7966,8 @@
         return this;
       },
       removeWidgets: function removeWidgets(widgets) {
+        var _this2 = this;
+
         if (!Array.isArray(widgets)) {
           throw new Error(withUsage('The `removeWidgets` method expects an array of widgets.'));
         }
@@ -7970,7 +7987,8 @@
             // the `dispose` method exists at this point we already assert it
             var next = widget.dispose({
               helper: helper,
-              state: state
+              state: state,
+              parent: _this2
             });
             return next || state;
           }, helper.state);
@@ -7991,7 +8009,7 @@
         return this;
       },
       init: function init(_ref2) {
-        var _this2 = this;
+        var _this3 = this;
 
         var instantSearchInstance = _ref2.instantSearchInstance,
             parent = _ref2.parent,
@@ -8048,7 +8066,7 @@
         };
 
         derivedHelper = mainHelper.derive(function () {
-          return merge$1.apply(void 0, _toConsumableArray(resolveSearchParameters(_this2)));
+          return merge$1.apply(void 0, _toConsumableArray(resolveSearchParameters(_this3)));
         }); // Subscribe to the Helper state changes for the page before widgets
         // are initialized. This behavior mimics the original one of the Helper.
         // It makes sense to replicate it at the `init` step. We have another
@@ -8070,7 +8088,7 @@
 
           {
             checkIndexUiState({
-              index: _this2,
+              index: _this3,
               indexUiState: localUiState
             });
           }
@@ -8086,21 +8104,21 @@
           // search behavior.
 
           helper.lastResults = results;
-        }); // We compute the render state before calling `render` in a separate loop
+        }); // We compute the render state before calling `init` in a separate loop
         // to construct the whole render state object that is then passed to
-        // `render`.
+        // `init`.
 
         localWidgets.forEach(function (widget) {
           if (widget.getRenderState) {
-            var renderState = widget.getRenderState(instantSearchInstance.renderState[_this2.getIndexId()] || {}, {
+            var renderState = widget.getRenderState(instantSearchInstance.renderState[_this3.getIndexId()] || {}, {
               uiState: uiState,
               helper: helper,
-              parent: _this2,
+              parent: _this3,
               instantSearchInstance: instantSearchInstance,
               state: helper.state,
               renderState: instantSearchInstance.renderState,
               templatesConfig: instantSearchInstance.templatesConfig,
-              createURL: _this2.createURL,
+              createURL: _this3.createURL,
               scopedResults: [],
               searchMetadata: {
                 isSearchStalled: instantSearchInstance._isSearchStalled
@@ -8109,7 +8127,7 @@
             storeRenderState({
               renderState: renderState,
               instantSearchInstance: instantSearchInstance,
-              parent: _this2
+              parent: _this3
             });
           }
         });
@@ -8122,12 +8140,12 @@
             widget.init({
               uiState: uiState,
               helper: helper,
-              parent: _this2,
+              parent: _this3,
               instantSearchInstance: instantSearchInstance,
               state: helper.state,
               renderState: instantSearchInstance.renderState,
               templatesConfig: instantSearchInstance.templatesConfig,
-              createURL: _this2.createURL,
+              createURL: _this3.createURL,
               scopedResults: [],
               searchMetadata: {
                 isSearchStalled: instantSearchInstance._isSearchStalled
@@ -8156,7 +8174,7 @@
         });
       },
       render: function render(_ref5) {
-        var _this3 = this;
+        var _this4 = this;
 
         var instantSearchInstance = _ref5.instantSearchInstance;
 
@@ -8166,16 +8184,16 @@
 
         localWidgets.forEach(function (widget) {
           if (widget.getRenderState) {
-            var renderState = widget.getRenderState(instantSearchInstance.renderState[_this3.getIndexId()] || {}, {
-              helper: _this3.getHelper(),
-              parent: _this3,
+            var renderState = widget.getRenderState(instantSearchInstance.renderState[_this4.getIndexId()] || {}, {
+              helper: _this4.getHelper(),
+              parent: _this4,
               instantSearchInstance: instantSearchInstance,
-              results: _this3.getResults(),
-              scopedResults: _this3.getScopedResults(),
-              state: _this3.getResults()._state,
+              results: _this4.getResults(),
+              scopedResults: _this4.getScopedResults(),
+              state: _this4.getResults()._state,
               renderState: instantSearchInstance.renderState,
               templatesConfig: instantSearchInstance.templatesConfig,
-              createURL: _this3.createURL,
+              createURL: _this4.createURL,
               searchMetadata: {
                 isSearchStalled: instantSearchInstance._isSearchStalled
               }
@@ -8183,7 +8201,7 @@
             storeRenderState({
               renderState: renderState,
               instantSearchInstance: instantSearchInstance,
-              parent: _this3
+              parent: _this4
             });
           }
         });
@@ -8197,14 +8215,14 @@
           if (widget.render) {
             widget.render({
               helper: helper,
-              parent: _this3,
+              parent: _this4,
               instantSearchInstance: instantSearchInstance,
-              results: _this3.getResults(),
-              scopedResults: _this3.getScopedResults(),
-              state: _this3.getResults()._state,
+              results: _this4.getResults(),
+              scopedResults: _this4.getScopedResults(),
+              state: _this4.getResults()._state,
               renderState: instantSearchInstance.renderState,
               templatesConfig: instantSearchInstance.templatesConfig,
-              createURL: _this3.createURL,
+              createURL: _this4.createURL,
               searchMetadata: {
                 isSearchStalled: instantSearchInstance._isSearchStalled
               }
@@ -8213,6 +8231,8 @@
         });
       },
       dispose: function dispose() {
+        var _this5 = this;
+
         localWidgets.forEach(function (widget) {
           if (widget.dispose) {
             // The dispose function is always called once the instance is started
@@ -8223,7 +8243,8 @@
             // operations on `add` & `remove`.
             widget.dispose({
               helper: helper,
-              state: helper.state
+              state: helper.state,
+              parent: _this5
             });
           }
         });
@@ -8267,7 +8288,7 @@
     instantSearchInstance.renderState = _objectSpread2(_objectSpread2({}, instantSearchInstance.renderState), {}, _defineProperty({}, parentIndexName, _objectSpread2(_objectSpread2({}, instantSearchInstance.renderState[parentIndexName]), renderState)));
   }
 
-  var version$1 = '4.21.0';
+  var version$1 = '4.22.0';
 
   var NAMESPACE = 'ais';
   var component = function component(componentName) {
@@ -9559,7 +9580,7 @@
       if (widget.getWidgetRenderState) {
         var renderState = widget.getWidgetRenderState(initOptions);
 
-        if (renderState && renderState.widgetParams) {
+        if (renderState && _typeof(renderState.widgetParams) === 'object') {
           widgetParams = renderState.widgetParams;
         }
       } // since we destructure in all widgets, the parameters with defaults are set to "undefined"
@@ -10101,6 +10122,16 @@
         this.scheduleSearch();
       }
     }, {
+      key: "getUiState",
+      value: function getUiState() {
+        if (this.started) {
+          // We refresh the index UI state to make sure changes from `refine` are taken in account
+          this.mainIndex.refreshUiState();
+        }
+
+        return this.mainIndex.getWidgetUiState({});
+      }
+    }, {
       key: "createURL",
       value: function createURL() {
         var nextState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -10454,6 +10485,19 @@
     connector: true
   });
 
+  /**
+   * **HierarchicalMenu** connector provides the logic to build a custom widget
+   * that will give the user the ability to explore facets in a tree-like structure.
+   *
+   * This is commonly used for multi-level categorization of products on e-commerce
+   * websites. From a UX point of view, we suggest not displaying more than two
+   * levels deep.
+   *
+   * @type {Connector}
+   * @param {function(HierarchicalMenuRenderingOptions, boolean)} renderFn Rendering function for the custom **HierarchicalMenu** widget.
+   * @param {function} unmountFn Unmount function called when the widget is disposed.
+   * @return {function(CustomHierarchicalMenuWidgetParams)} Re-usable widget factory for a custom **HierarchicalMenu** widget.
+   */
   var connectHierarchicalMenu = function connectHierarchicalMenu(renderFn) {
     var unmountFn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : noop;
     checkRendering(renderFn, withUsage$4());
@@ -10485,11 +10529,11 @@
 
       if (showMore === true && showMoreLimit <= limit) {
         throw new Error(withUsage$4('The `showMoreLimit` option must be greater than `limit`.'));
-      } // we need to provide a hierarchicalFacet name for the search state
+      }
+
+      // we need to provide a hierarchicalFacet name for the search state
       // so that we can always map $hierarchicalFacetName => real attributes
       // we use the first attribute name
-
-
       var _attributes = _slicedToArray(attributes, 1),
           hierarchicalFacetName = _attributes[0];
 
@@ -10884,8 +10928,8 @@
 
 
   function withInsights(connector) {
-    var wrapRenderFn = function wrapRenderFn(renderFn) {
-      return function (renderOptions, isFirstRender) {
+    return function (renderFn, unmountFn) {
+      return connector(function (renderOptions, isFirstRender) {
         var results = renderOptions.results,
             hits = renderOptions.hits,
             instantSearchInstance = renderOptions.instantSearchInstance;
@@ -10898,11 +10942,7 @@
         }
 
         return renderFn(renderOptions, isFirstRender);
-      };
-    };
-
-    return function (renderFn, unmountFn) {
-      return connector(wrapRenderFn(renderFn), unmountFn);
+      }, unmountFn);
     };
   }
 
@@ -11127,7 +11167,7 @@
 
   function getInMemoryCache() {
     var cachedHits = null;
-    var cachedState = undefined;
+    var cachedState = null;
     return {
       read: function read(_ref2) {
         var state = _ref2.state;
@@ -12513,15 +12553,14 @@
                     label: value
                   });
                 }));
-                var canToggleShowMore = isShowingMore && lastItemsFromMainSearch.length > limit;
                 renderFn(_objectSpread2(_objectSpread2({}, widget.getWidgetRenderState(_objectSpread2(_objectSpread2({}, renderOptions), {}, {
                   results: lastResultsFromMainSearch
                 }))), {}, {
                   items: normalizedFacetValues,
-                  canToggleShowMore: canToggleShowMore,
+                  canToggleShowMore: false,
                   canRefine: true,
-                  instantSearchInstance: instantSearchInstance,
-                  isFromSearch: true
+                  isFromSearch: true,
+                  instantSearchInstance: instantSearchInstance
                 }), false);
               });
             }
@@ -12551,8 +12590,6 @@
               state = renderOptions.state,
               _createURL = renderOptions.createURL,
               instantSearchInstance = renderOptions.instantSearchInstance,
-              _renderOptions$isFrom = renderOptions.isFromSearch,
-              isFromSearch = _renderOptions$isFrom === void 0 ? false : _renderOptions$isFrom,
               helper = renderOptions.helper;
           var items = [];
           var facetValues = [];
@@ -12574,25 +12611,11 @@
           }
 
           if (results) {
-            if (!isFromSearch) {
-              var values = results.getFacetValues(attribute, {
-                sortBy: sortBy
-              });
-              facetValues = values && Array.isArray(values) ? values : [];
-              items = transformItems(facetValues.slice(0, getLimit()).map(formatItems));
-            } else {
-              facetValues = escapeFacetValues ? escapeFacets(results.facetHits) : results.facetHits;
-              items = transformItems(facetValues.map(function (_ref4) {
-                var value = _ref4.value,
-                    item = _objectWithoutProperties(_ref4, ["value"]);
-
-                return _objectSpread2(_objectSpread2({}, item), {}, {
-                  value: value,
-                  label: value
-                });
-              }));
-            }
-
+            var values = results.getFacetValues(attribute, {
+              sortBy: sortBy
+            });
+            facetValues = values && Array.isArray(values) ? values : [];
+            items = transformItems(facetValues.slice(0, getLimit()).map(formatItems));
             var maxValuesPerFacetConfig = state.maxValuesPerFacet;
             var currentLimit = getLimit(); // If the limit is the max number of facet retrieved it is impossible to know
             // if the facets are exhaustive. The only moment we are sure it is exhaustive
@@ -12614,7 +12637,7 @@
 
           var searchFacetValues = searchForFacetValues && searchForFacetValues(renderOptions);
           var canShowLess = isShowingMore && lastItemsFromMainSearch.length > limit;
-          var canShowMore = showMore && !isFromSearch && !hasExhaustiveItems;
+          var canShowMore = showMore && !hasExhaustiveItems;
           var canToggleShowMore = canShowLess || canShowMore;
           return {
             createURL: function createURL(facetValue) {
@@ -12623,8 +12646,8 @@
             items: items,
             refine: triggerRefine,
             searchForItems: searchFacetValues,
-            isFromSearch: isFromSearch,
-            canRefine: isFromSearch || items.length > 0,
+            isFromSearch: false,
+            canRefine: items.length > 0,
             widgetParams: widgetParams,
             isShowingMore: isShowingMore,
             canToggleShowMore: canToggleShowMore,
@@ -12633,8 +12656,8 @@
             hasExhaustiveItems: hasExhaustiveItems
           };
         },
-        dispose: function dispose(_ref5) {
-          var state = _ref5.state;
+        dispose: function dispose(_ref4) {
+          var state = _ref4.state;
           unmountFn();
           var withoutMaxValuesPerFacet = state.setQueryParameter('maxValuesPerFacet', undefined);
 
@@ -12644,8 +12667,8 @@
 
           return withoutMaxValuesPerFacet.removeDisjunctiveFacet(attribute);
         },
-        getWidgetUiState: function getWidgetUiState(uiState, _ref6) {
-          var searchParameters = _ref6.searchParameters;
+        getWidgetUiState: function getWidgetUiState(uiState, _ref5) {
+          var searchParameters = _ref5.searchParameters;
           var values = operator === 'or' ? searchParameters.getDisjunctiveRefinements(attribute) : searchParameters.getConjunctiveRefinements(attribute);
 
           if (!values.length) {
@@ -12656,8 +12679,8 @@
             refinementList: _objectSpread2(_objectSpread2({}, uiState.refinementList), {}, _defineProperty({}, attribute, values))
           });
         },
-        getWidgetSearchParameters: function getWidgetSearchParameters(searchParameters, _ref7) {
-          var uiState = _ref7.uiState;
+        getWidgetSearchParameters: function getWidgetSearchParameters(searchParameters, _ref6) {
+          var uiState = _ref6.uiState;
           var isDisjunctive = operator === 'or';
           var values = uiState.refinementList && uiState.refinementList[attribute];
           var withoutRefinements = searchParameters.clearRefinements(attribute);
@@ -13246,10 +13269,11 @@
 
   var createSendEvent$2 = function createSendEvent(_ref) {
     var instantSearchInstance = _ref.instantSearchInstance,
+        helper = _ref.helper,
         attribute = _ref.attribute,
-        on = _ref.on,
-        helper = _ref.helper;
-    return function () {
+        on = _ref.on;
+
+    var sendEventForToggle = function sendEventForToggle() {
       for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
         args[_key] = arguments[_key];
       }
@@ -13266,7 +13290,8 @@
 
       if (eventType !== 'click' || on === undefined) {
         return;
-      } // Checking
+      } // only send an event when the refinement gets applied,
+      // not when it gets removed
 
 
       if (!isRefined) {
@@ -13285,30 +13310,9 @@
         });
       }
     };
+
+    return sendEventForToggle;
   };
-  /**
-   * @typedef {Object} ToggleValue
-   * @property {boolean} isRefined `true` if the toggle is on.
-   * @property {number} count Number of results matched after applying the toggle refinement.
-   * @property {Object} onFacetValue Value of the toggle when it's on.
-   * @property {Object} offFacetValue Value of the toggle when it's off.
-   */
-
-  /**
-   * @typedef {Object} CustomToggleWidgetParams
-   * @property {string} attribute Name of the attribute for faceting (eg. "free_shipping").
-   * @property {Object} [on = true] Value to filter on when toggled.
-   * @property {Object} [off] Value to filter on when not toggled.
-   */
-
-  /**
-   * @typedef {Object} ToggleRenderingOptions
-   * @property {ToggleValue} value The current toggle value.
-   * @property {function():string} createURL Creates an URL for the next state.
-   * @property {boolean} canRefine Indicates if search state can be refined.
-   * @property {function(value)} refine Updates to the next state by applying the toggle refinement.
-   * @property {Object} widgetParams All original `CustomToggleWidgetParams` forwarded to the `renderFn`.
-   */
 
   /**
    * **Toggle** connector provides the logic to build a custom widget that will provide
@@ -13317,79 +13321,33 @@
    * Two modes are implemented in the custom widget:
    *  - with or without the value filtered
    *  - switch between two values.
-   *
-   * @type {Connector}
-   * @param {function(ToggleRenderingOptions, boolean)} renderFn Rendering function for the custom **Toggle** widget.
-   * @param {function} unmountFn Unmount function called when the widget is disposed.
-   * @return {function(CustomToggleWidgetParams)} Re-usable widget factory for a custom **Toggle** widget.
-   * @example
-   * // custom `renderFn` to render the custom ClearAll widget
-   * function renderFn(ToggleRenderingOptions, isFirstRendering) {
-   *   ToggleRenderingOptions.widgetParams.containerNode
-   *     .find('a')
-   *     .off('click');
-   *
-   *   var buttonHTML = `
-   *     <a href="${ToggleRenderingOptions.createURL()}">
-   *       <input
-   *         type="checkbox"
-   *         value="${ToggleRenderingOptions.value.name}"
-   *         ${ToggleRenderingOptions.value.isRefined ? 'checked' : ''}
-   *       />
-   *       ${ToggleRenderingOptions.value.name} (${ToggleRenderingOptions.value.count})
-   *     </a>
-   *   `;
-   *
-   *   ToggleRenderingOptions.widgetParams.containerNode.html(buttonHTML);
-   *   ToggleRenderingOptions.widgetParams.containerNode
-   *     .find('a')
-   *     .on('click', function(event) {
-   *       event.preventDefault();
-   *       event.stopPropagation();
-   *
-   *       ToggleRenderingOptions.refine(ToggleRenderingOptions.value);
-   *     });
-   * }
-   *
-   * // connect `renderFn` to Toggle logic
-   * var customToggle = instantsearch.connectors.connectToggleRefinement(renderFn);
-   *
-   * // mount widget on the page
-   * search.addWidgets([
-   *   customToggle({
-   *     containerNode: $('#custom-toggle-container'),
-   *     attribute: 'free_shipping',
-   *   })
-   * ]);
    */
-
-
-  function connectToggleRefinement(renderFn) {
+  var connectToggleRefinement = function connectToggleRefinement(renderFn) {
     var unmountFn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : noop;
     checkRendering(renderFn, withUsage$h());
-    return function () {
-      var widgetParams = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var attribute = widgetParams.attribute,
-          _widgetParams$on = widgetParams.on,
-          userOn = _widgetParams$on === void 0 ? true : _widgetParams$on,
-          userOff = widgetParams.off;
+    return function (widgetParams) {
+      var _ref2 = widgetParams || {},
+          attribute = _ref2.attribute,
+          _ref2$on = _ref2.on,
+          userOn = _ref2$on === void 0 ? true : _ref2$on,
+          userOff = _ref2.off;
 
       if (!attribute) {
         throw new Error(withUsage$h('The `attribute` option is required.'));
       }
 
       var hasAnOffValue = userOff !== undefined;
-      var hasAnOnValue = userOn !== undefined;
-      var on = hasAnOnValue ? toArray(userOn).map(escapeRefinement) : undefined;
+      var on = toArray(userOn).map(escapeRefinement);
       var off = hasAnOffValue ? toArray(userOff).map(escapeRefinement) : undefined;
       var sendEvent;
 
       var toggleRefinementFactory = function toggleRefinementFactory(helper) {
         return function () {
-          var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-              isRefined = _ref2.isRefined;
+          var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+            isRefined: false
+          },
+              isRefined = _ref3.isRefined;
 
-          // Checking
           if (!isRefined) {
             sendEvent('click', isRefined);
 
@@ -13403,7 +13361,6 @@
               return helper.addDisjunctiveFacetRefinement(attribute, v);
             });
           } else {
-            // Unchecking
             on.forEach(function (v) {
               return helper.removeDisjunctiveFacetRefinement(attribute, v);
             });
@@ -13420,9 +13377,9 @@
       };
 
       var connectorState = {
-        createURLFactory: function createURLFactory(isRefined, _ref3) {
-          var state = _ref3.state,
-              createURL = _ref3.createURL;
+        createURLFactory: function createURLFactory(isRefined, _ref4) {
+          var state = _ref4.state,
+              createURL = _ref4.createURL;
           return function () {
             state = state.resetPage();
             var valuesToRemove = isRefined ? on : off;
@@ -13459,25 +13416,25 @@
             instantSearchInstance: instantSearchInstance
           }), false);
         },
-        dispose: function dispose(_ref4) {
-          var state = _ref4.state;
+        dispose: function dispose(_ref5) {
+          var state = _ref5.state;
           unmountFn();
           return state.removeDisjunctiveFacet(attribute);
         },
         getRenderState: function getRenderState(renderState, renderOptions) {
           return _objectSpread2(_objectSpread2({}, renderState), {}, {
-            toggleRefinement: this.getWidgetRenderState(renderOptions)
+            toggleRefinement: _objectSpread2(_objectSpread2({}, renderState.toggleRefinement), {}, _defineProperty({}, attribute, this.getWidgetRenderState(renderOptions)))
           });
         },
-        getWidgetRenderState: function getWidgetRenderState(_ref5) {
-          var state = _ref5.state,
-              helper = _ref5.helper,
-              results = _ref5.results,
-              createURL = _ref5.createURL,
-              instantSearchInstance = _ref5.instantSearchInstance;
-          var isRefined = results ? on === null || on === void 0 ? void 0 : on.every(function (v) {
+        getWidgetRenderState: function getWidgetRenderState(_ref6) {
+          var state = _ref6.state,
+              helper = _ref6.helper,
+              results = _ref6.results,
+              createURL = _ref6.createURL,
+              instantSearchInstance = _ref6.instantSearchInstance;
+          var isRefined = results ? on.every(function (v) {
             return helper.state.isDisjunctiveFacetRefined(attribute, v);
-          }) : on === null || on === void 0 ? void 0 : on.every(function (v) {
+          }) : on.every(function (v) {
             return state.isDisjunctiveFacetRefined(attribute, v);
           });
           var onFacetValue = {
@@ -13491,18 +13448,18 @@
 
           if (results) {
             var offValue = toArray(off || false);
-            var allFacetValues = results.getFacetValues(attribute) || [];
-            var onData = on === null || on === void 0 ? void 0 : on.map(function (v) {
-              return find$1(allFacetValues, function (_ref6) {
-                var name = _ref6.name;
+            var allFacetValues = results.getFacetValues(attribute, {}) || [];
+            var onData = on.map(function (v) {
+              return find$1(allFacetValues, function (_ref7) {
+                var name = _ref7.name;
                 return name === unescapeRefinement(v);
               });
             }).filter(function (v) {
               return v !== undefined;
             });
             var offData = hasAnOffValue ? offValue.map(function (v) {
-              return find$1(allFacetValues, function (_ref7) {
-                var name = _ref7.name;
+              return find$1(allFacetValues, function (_ref8) {
+                var name = _ref8.name;
                 return name === unescapeRefinement(v);
               });
             }).filter(function (v) {
@@ -13522,8 +13479,8 @@
               }) : false,
               count: offData.reduce(function (acc, v) {
                 return acc + v.count;
-              }, 0) || allFacetValues.reduce(function (total, _ref8) {
-                var count = _ref8.count;
+              }, 0) || allFacetValues.reduce(function (total, _ref9) {
+                var count = _ref9.count;
                 return total + count;
               }, 0)
             };
@@ -13555,7 +13512,6 @@
               onFacetValue: onFacetValue,
               offFacetValue: offFacetValue
             },
-            state: state,
             createURL: connectorState.createURLFactory(isRefined, {
               state: state,
               createURL: createURL
@@ -13566,8 +13522,8 @@
             widgetParams: widgetParams
           };
         },
-        getWidgetUiState: function getWidgetUiState(uiState, _ref9) {
-          var searchParameters = _ref9.searchParameters;
+        getWidgetUiState: function getWidgetUiState(uiState, _ref10) {
+          var searchParameters = _ref10.searchParameters;
           var isRefined = on && on.every(function (v) {
             return searchParameters.isDisjunctiveFacetRefined(attribute, v);
           });
@@ -13580,8 +13536,8 @@
             toggle: _objectSpread2(_objectSpread2({}, uiState.toggle), {}, _defineProperty({}, attribute, isRefined))
           });
         },
-        getWidgetSearchParameters: function getWidgetSearchParameters(searchParameters, _ref10) {
-          var uiState = _ref10.uiState;
+        getWidgetSearchParameters: function getWidgetSearchParameters(searchParameters, _ref11) {
+          var uiState = _ref11.uiState;
           var withFacetConfiguration = searchParameters.clearRefinements(attribute).addDisjunctiveFacet(attribute);
           var isRefined = Boolean(uiState.toggle && uiState.toggle[attribute]);
 
@@ -13613,7 +13569,7 @@
         }
       };
     };
-  }
+  };
 
   var withUsage$i = createDocumentationMessageGenerator({
     name: 'breadcrumb',
@@ -15008,18 +14964,139 @@
           };
         },
         getWidgetSearchParameters: function getWidgetSearchParameters(state, _ref4) {
-          var _uiState$relevantSort, _uiState$relevantSort2;
+          var _uiState$relevantSort;
 
           var uiState = _ref4.uiState;
-          return state.setQueryParameter('relevancyStrictness', (_uiState$relevantSort = (_uiState$relevantSort2 = uiState.relevantSort) === null || _uiState$relevantSort2 === void 0 ? void 0 : _uiState$relevantSort2.relevancyStrictness) !== null && _uiState$relevantSort !== void 0 ? _uiState$relevantSort : state.relevancyStrictness);
+          return state.setQueryParameter('relevancyStrictness', (_uiState$relevantSort = uiState.relevantSort) !== null && _uiState$relevantSort !== void 0 ? _uiState$relevantSort : state.relevancyStrictness);
         },
         getWidgetUiState: function getWidgetUiState(uiState, _ref5) {
           var searchParameters = _ref5.searchParameters;
           return _objectSpread2(_objectSpread2({}, uiState), {}, {
-            relevantSort: _objectSpread2(_objectSpread2({}, uiState.relevantSort), {}, {
-              relevancyStrictness: searchParameters.relevancyStrictness
-            })
+            relevantSort: searchParameters.relevancyStrictness || uiState.relevantSort
           });
+        }
+      };
+    };
+  };
+
+  var withUsage$r = createDocumentationMessageGenerator({
+    name: 'dynamic-widgets',
+    connector: true
+  });
+
+  var connectDynamicWidgets = function connectDynamicWidgets(renderFn) {
+    var unmountFn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : noop;
+    checkRendering(renderFn, withUsage$r());
+    return function (widgetParams) {
+      var widgets = widgetParams.widgets,
+          transformItems = widgetParams.transformItems;
+
+      if (!widgets || !Array.isArray(widgets) || widgets.some(function (widget) {
+        return _typeof(widget) !== 'object';
+      })) {
+        throw new Error(withUsage$r('The `widgets` option expects an array of widgets.'));
+      } // @TODO once the attributes are computed from the results, make this optional
+
+
+      if (typeof transformItems !== 'function') {
+        throw new Error(withUsage$r('the `transformItems` option is required to be a function.'));
+      }
+
+      if (!widgets || !Array.isArray(widgets) || widgets.some(function (widget) {
+        return _typeof(widget) !== 'object';
+      })) {
+        throw new Error(withUsage$r('The `widgets` option expects an array of widgets.'));
+      }
+
+      var localWidgets = new Map();
+      return {
+        $$type: 'ais.dynamicWidgets',
+        init: function init(initOptions) {
+          widgets.forEach(function (widget) {
+            var attribute = getWidgetAttribute(widget, initOptions);
+            localWidgets.set(attribute, {
+              widget: widget,
+              isMounted: true
+            });
+          });
+          initOptions.parent.addWidgets(widgets);
+          renderFn(_objectSpread2(_objectSpread2({}, this.getWidgetRenderState(initOptions)), {}, {
+            instantSearchInstance: initOptions.instantSearchInstance
+          }), true);
+        },
+        render: function render(renderOptions) {
+          var parent = renderOptions.parent;
+          var renderState = this.getWidgetRenderState(renderOptions);
+          var widgetsToUnmount = [];
+          var widgetsToMount = [];
+          localWidgets.forEach(function (_ref, attribute) {
+            var widget = _ref.widget,
+                isMounted = _ref.isMounted;
+            var shouldMount = renderState.attributesToRender.indexOf(attribute) > -1;
+
+            if (!isMounted && shouldMount) {
+              widgetsToMount.push(widget);
+              localWidgets.set(attribute, {
+                widget: widget,
+                isMounted: true
+              });
+            } else if (isMounted && !shouldMount) {
+              widgetsToUnmount.push(widget);
+              localWidgets.set(attribute, {
+                widget: widget,
+                isMounted: false
+              });
+            }
+          });
+          parent.addWidgets(widgetsToMount); // make sure this only happens after the regular render, otherwise it
+          // happens too quick, since render is "deferred" for the next microtask,
+          // so this needs to be a whole task later
+
+          setTimeout(function () {
+            return parent.removeWidgets(widgetsToUnmount);
+          }, 0);
+          renderFn(_objectSpread2(_objectSpread2({}, renderState), {}, {
+            instantSearchInstance: renderOptions.instantSearchInstance
+          }), false);
+        },
+        dispose: function dispose(_ref2) {
+          var parent = _ref2.parent;
+          var toRemove = [];
+          localWidgets.forEach(function (_ref3) {
+            var widget = _ref3.widget,
+                isMounted = _ref3.isMounted;
+
+            if (isMounted) {
+              toRemove.push(widget);
+            }
+          });
+          parent.removeWidgets(toRemove);
+          unmountFn();
+        },
+        getRenderState: function getRenderState(renderState, renderOptions) {
+          return _objectSpread2(_objectSpread2({}, renderState), {}, {
+            dynamicWidgets: this.getWidgetRenderState(renderOptions)
+          });
+        },
+        getWidgetRenderState: function getWidgetRenderState(_ref4) {
+          var results = _ref4.results;
+
+          if (!results) {
+            return {
+              attributesToRender: [],
+              widgetParams: widgetParams
+            };
+          } // @TODO: retrieve the facet order out of the results:
+          // results.renderContext.facetOrder.map(facet => facet.attribute)
+
+
+          var attributesToRender = transformItems([], {
+            results: results
+          });
+          return {
+            attributesToRender: attributesToRender,
+            widgetParams: widgetParams
+          };
         }
       };
     };
@@ -15056,7 +15133,8 @@
     connectQueryRules: connectQueryRules,
     connectVoiceSearch: connectVoiceSearch,
     EXPERIMENTAL_connectAnswers: connectAnswers,
-    connectRelevantSort: connectRelevantSort
+    connectRelevantSort: connectRelevantSort,
+    EXPERIMENTAL_connectDynamicWidgets: connectDynamicWidgets
   });
 
   var classnames = createCommonjsModule(function (module) {
@@ -15192,7 +15270,7 @@
     resetLabel: 'Clear refinements'
   };
 
-  var withUsage$r = createDocumentationMessageGenerator({
+  var withUsage$s = createDocumentationMessageGenerator({
     name: 'clear-refinements'
   });
   var suit$4 = component('ClearRefinements');
@@ -15237,7 +15315,7 @@
         userCssClasses = _ref3$cssClasses === void 0 ? {} : _ref3$cssClasses;
 
     if (!container) {
-      throw new Error(withUsage$r('The `container` option is required.'));
+      throw new Error(withUsage$s('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -15342,7 +15420,7 @@
     })));
   };
 
-  var withUsage$s = createDocumentationMessageGenerator({
+  var withUsage$t = createDocumentationMessageGenerator({
     name: 'current-refinements'
   });
   var suit$5 = component('CurrentRefinements');
@@ -15373,7 +15451,7 @@
         transformItems = _ref2.transformItems;
 
     if (!container) {
-      throw new Error(withUsage$s('The `container` option is required.'));
+      throw new Error(withUsage$t('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -15822,7 +15900,7 @@
     return HTMLMarker;
   };
 
-  var withUsage$t = createDocumentationMessageGenerator({
+  var withUsage$u = createDocumentationMessageGenerator({
     name: 'geo-search'
   });
   var suit$6 = component('GeoSearch');
@@ -15952,11 +16030,11 @@
     };
 
     if (!container) {
-      throw new Error(withUsage$t('The `container` option is required.'));
+      throw new Error(withUsage$u('The `container` option is required.'));
     }
 
     if (!googleReference) {
-      throw new Error(withUsage$t('The `googleReference` option is required.'));
+      throw new Error(withUsage$u('The `googleReference` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -16514,8 +16592,7 @@
         }));
         var facetValues = this.props.facetValues && this.props.facetValues.length > 0 && h("ul", {
           className: this.props.cssClasses.list
-        }, // @ts-expect-error until TS > 4.2.3 is used https://github.com/microsoft/TypeScript/commit/b217f22e798c781f55d17da72ed099a9dee5c650
-        this.props.facetValues.map(this._generateFacetItem, this));
+        }, this.props.facetValues.map(this._generateFacetItem, this));
         var noResults = this.props.searchFacetValues && this.props.isFromSearch && (!this.props.facetValues || this.props.facetValues.length === 0) && h(Template, _extends({}, this.props.templateProps, {
           templateKey: "searchableNoResults",
           rootProps: {
@@ -16539,7 +16616,7 @@
     showMoreText: "\n    {{#isShowingMore}}\n      Show less\n    {{/isShowingMore}}\n    {{^isShowingMore}}\n      Show more\n    {{/isShowingMore}}\n  "
   };
 
-  var withUsage$u = createDocumentationMessageGenerator({
+  var withUsage$v = createDocumentationMessageGenerator({
     name: 'hierarchical-menu'
   });
   var suit$7 = component('HierarchicalMenu');
@@ -16653,7 +16730,7 @@
         userCssClasses = _ref3$cssClasses === void 0 ? {} : _ref3$cssClasses;
 
     if (!container) {
-      throw new Error(withUsage$u('The `container` option is required.'));
+      throw new Error(withUsage$v('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -16773,7 +16850,7 @@
     }
   };
 
-  var withUsage$v = createDocumentationMessageGenerator({
+  var withUsage$w = createDocumentationMessageGenerator({
     name: 'hits'
   });
   var suit$8 = component('Hits');
@@ -16825,7 +16902,7 @@
         userCssClasses = _ref3$cssClasses === void 0 ? {} : _ref3$cssClasses;
 
     if (!container) {
-      throw new Error(withUsage$v('The `container` option is required.'));
+      throw new Error(withUsage$w('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -16880,7 +16957,7 @@
     }));
   }
 
-  var withUsage$w = createDocumentationMessageGenerator({
+  var withUsage$x = createDocumentationMessageGenerator({
     name: 'hits-per-page'
   });
   var suit$9 = component('HitsPerPage');
@@ -16919,7 +16996,7 @@
         transformItems = _ref5.transformItems;
 
     if (!container) {
-      throw new Error(withUsage$w('The `container` option is required.'));
+      throw new Error(withUsage$x('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -17014,7 +17091,7 @@
     }
   };
 
-  var withUsage$x = createDocumentationMessageGenerator({
+  var withUsage$y = createDocumentationMessageGenerator({
     name: 'infinite-hits'
   });
   var suit$a = component('InfiniteHits');
@@ -17078,7 +17155,7 @@
         cache = _ref3.cache;
 
     if (!container) {
-      throw new Error(withUsage$x('The `container` option is required.'));
+      throw new Error(withUsage$y('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -17133,7 +17210,7 @@
     showMoreText: "\n    {{#isShowingMore}}\n      Show less\n    {{/isShowingMore}}\n    {{^isShowingMore}}\n      Show more\n    {{/isShowingMore}}\n  "
   };
 
-  var withUsage$y = createDocumentationMessageGenerator({
+  var withUsage$z = createDocumentationMessageGenerator({
     name: 'menu'
   });
   var suit$b = component('Menu');
@@ -17196,7 +17273,7 @@
         transformItems = _ref3.transformItems;
 
     if (!container) {
-      throw new Error(withUsage$y('The `container` option is required.'));
+      throw new Error(withUsage$z('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -17261,7 +17338,7 @@
     loadingIndicator: "\n<svg class=\"{{cssClasses.loadingIcon}}\" width=\"16\" height=\"16\" viewBox=\"0 0 38 38\" xmlns=\"http://www.w3.org/2000/svg\" stroke=\"#444\">\n  <g fill=\"none\" fillRule=\"evenodd\">\n    <g transform=\"translate(1 1)\" strokeWidth=\"2\">\n      <circle strokeOpacity=\".5\" cx=\"18\" cy=\"18\" r=\"18\" />\n      <path d=\"M36 18c0-9.94-8.06-18-18-18\">\n        <animateTransform\n          attributeName=\"transform\"\n          type=\"rotate\"\n          from=\"0 18 18\"\n          to=\"360 18 18\"\n          dur=\"1s\"\n          repeatCount=\"indefinite\"\n        />\n      </path>\n    </g>\n  </g>\n</svg>\n  "
   };
 
-  var withUsage$z = createDocumentationMessageGenerator({
+  var withUsage$A = createDocumentationMessageGenerator({
     name: 'refinement-list'
   });
   var suit$c = component('RefinementList');
@@ -17371,7 +17448,7 @@
         transformItems = _ref3.transformItems;
 
     if (!container) {
-      throw new Error(withUsage$z('The `container` option is required.'));
+      throw new Error(withUsage$A('The `container` option is required.'));
     }
 
     var escapeFacetValues = searchable ? Boolean(searchableEscapeFacetValues) : false;
@@ -17480,7 +17557,7 @@
     item: "<label class=\"{{cssClasses.label}}\">\n  <input type=\"radio\" class=\"{{cssClasses.radio}}\" name=\"{{attribute}}\"{{#isRefined}} checked{{/isRefined}} />\n  <span class=\"{{cssClasses.labelText}}\">{{label}}</span>\n</label>"
   };
 
-  var withUsage$A = createDocumentationMessageGenerator({
+  var withUsage$B = createDocumentationMessageGenerator({
     name: 'numeric-menu'
   });
   var suit$d = component('NumericMenu');
@@ -17529,7 +17606,7 @@
         transformItems = _ref3.transformItems;
 
     if (!container) {
-      throw new Error(withUsage$A('The `container` option is required.'));
+      throw new Error(withUsage$B('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -17779,7 +17856,7 @@
     nbPages: 0
   };
 
-  var withUsage$B = createDocumentationMessageGenerator({
+  var withUsage$C = createDocumentationMessageGenerator({
     name: 'pagination'
   });
   var suit$e = component('Pagination');
@@ -17927,7 +18004,7 @@
         userScrollTo = _ref3$scrollTo === void 0 ? 'body' : _ref3$scrollTo;
 
     if (!container) {
-      throw new Error(withUsage$B('The `container` option is required.'));
+      throw new Error(withUsage$C('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -18105,7 +18182,7 @@
     return RangeInput;
   }(m);
 
-  var withUsage$C = createDocumentationMessageGenerator({
+  var withUsage$D = createDocumentationMessageGenerator({
     name: 'range-input'
   });
   var suit$f = component('RangeInput');
@@ -18225,7 +18302,7 @@
         userTemplates = _ref3$templates === void 0 ? {} : _ref3$templates;
 
     if (!container) {
-      throw new Error(withUsage$C('The `container` option is required.'));
+      throw new Error(withUsage$D('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -18284,7 +18361,7 @@
     });
   }
 
-  var withUsage$D = createDocumentationMessageGenerator({
+  var withUsage$E = createDocumentationMessageGenerator({
     name: 'search-box'
   });
   var suit$g = component('SearchBox');
@@ -18349,7 +18426,7 @@
         templates = _ref3.templates;
 
     if (!container) {
-      throw new Error(withUsage$D('The `container` option is required.'));
+      throw new Error(withUsage$E('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -19241,7 +19318,7 @@
     return Slider;
   }(m);
 
-  var withUsage$E = createDocumentationMessageGenerator({
+  var withUsage$F = createDocumentationMessageGenerator({
     name: 'range-slider'
   });
   var suit$h = component('RangeSlider');
@@ -19364,7 +19441,7 @@
         tooltips = _ref3$tooltips === void 0 ? true : _ref3$tooltips;
 
     if (!container) {
-      throw new Error(withUsage$E('The `container` option is required.'));
+      throw new Error(withUsage$F('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -19396,7 +19473,7 @@
     });
   }
 
-  var withUsage$F = createDocumentationMessageGenerator({
+  var withUsage$G = createDocumentationMessageGenerator({
     name: 'sort-by'
   });
   var suit$i = component('SortBy');
@@ -19438,7 +19515,7 @@
         transformItems = _ref3.transformItems;
 
     if (!container) {
-      throw new Error(withUsage$F('The `container` option is required.'));
+      throw new Error(withUsage$G('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -19471,7 +19548,7 @@
     item: "{{#count}}<a class=\"{{cssClasses.link}}\" aria-label=\"{{value}} & up\" href=\"{{url}}\">{{/count}}{{^count}}<div class=\"{{cssClasses.link}}\" aria-label=\"{{value}} & up\" disabled>{{/count}}\n  {{#stars}}<svg class=\"{{cssClasses.starIcon}} {{#.}}{{cssClasses.fullStarIcon}}{{/.}}{{^.}}{{cssClasses.emptyStarIcon}}{{/.}}\" aria-hidden=\"true\" width=\"24\" height=\"24\">\n    {{#.}}<use xlink:href=\"#ais-RatingMenu-starSymbol\"></use>{{/.}}{{^.}}<use xlink:href=\"#ais-RatingMenu-starEmptySymbol\"></use>{{/.}}\n  </svg>{{/stars}}\n  <span class=\"{{cssClasses.label}}\">& Up</span>\n  {{#count}}<span class=\"{{cssClasses.count}}\">{{#helpers.formatNumber}}{{count}}{{/helpers.formatNumber}}</span>{{/count}}\n{{#count}}</a>{{/count}}{{^count}}</div>{{/count}}"
   };
 
-  var withUsage$G = createDocumentationMessageGenerator({
+  var withUsage$H = createDocumentationMessageGenerator({
     name: 'rating-menu'
   });
   var suit$j = component('RatingMenu');
@@ -19566,7 +19643,7 @@
         templates = _ref5$templates === void 0 ? defaultTemplates$a : _ref5$templates;
 
     if (!container) {
-      throw new Error(withUsage$G('The `container` option is required.'));
+      throw new Error(withUsage$H('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -19656,7 +19733,7 @@
     })));
   };
 
-  var withUsage$H = createDocumentationMessageGenerator({
+  var withUsage$I = createDocumentationMessageGenerator({
     name: 'stats'
   });
   var suit$k = component('Stats');
@@ -19720,7 +19797,7 @@
         templates = _ref3$templates === void 0 ? defaultTemplates$b : _ref3$templates;
 
     if (!container) {
-      throw new Error(withUsage$H('The `container` option is required.'));
+      throw new Error(withUsage$I('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -19758,7 +19835,9 @@
       type: "checkbox",
       checked: currentRefinement.isRefined,
       onChange: function onChange(event) {
-        return refine(!event.target.checked);
+        return refine({
+          isRefined: !event.target.checked
+        });
       }
     }), h(Template, _extends({}, templateProps, {
       rootTagName: "span",
@@ -19774,7 +19853,7 @@
     labelText: '{{name}}'
   };
 
-  var withUsage$I = createDocumentationMessageGenerator({
+  var withUsage$J = createDocumentationMessageGenerator({
     name: 'toggle-refinement'
   });
   var suit$l = component('ToggleRefinement');
@@ -19786,8 +19865,7 @@
         templates = _ref.templates;
     return function (_ref2, isFirstRendering) {
       var value = _ref2.value,
-          createURL = _ref2.createURL,
-          _refine = _ref2.refine,
+          refine = _ref2.refine,
           instantSearchInstance = _ref2.instantSearchInstance;
 
       if (isFirstRendering) {
@@ -19800,47 +19878,13 @@
       }
 
       I(h(ToggleRefinement, {
-        createURL: createURL,
         cssClasses: cssClasses,
         currentRefinement: value,
         templateProps: renderState.templateProps,
-        refine: function refine(isRefined) {
-          return _refine({
-            isRefined: isRefined
-          });
-        }
+        refine: refine
       }), containerNode);
     };
   };
-  /**
-   * @typedef {Object} ToggleWidgetCSSClasses
-   * @property {string|string[]} [root] CSS class to add to the root element.
-   * @property {string|string[]} [label] CSS class to add to the label wrapping element
-   * @property {string|string[]} [checkbox] CSS class to add to the checkbox
-   * @property {string|string[]} [labelText] CSS class to add to the label text.
-   */
-
-  /**
-   * @typedef {Object} ToggleWidgetTemplates
-   * @property {string|function(object):string} labelText the text that describes the toggle action. This
-   * template receives some contextual information:
-   *  - `isRefined` which is `true` if the checkbox is checked
-   *  - `count` - the count of the values if the toggle in the next refinements
-   *  - `onFacetValue`, `offFacetValue`: objects with `count` (useful to get the other value of `count`)
-   */
-
-  /**
-   * @typedef {Object} ToggleWidgetParams
-   * @property {string|HTMLElement} container Place where to insert the widget in your webpage.
-   * @property {string} attribute Name of the attribute for faceting (eg. "free_shipping").
-   * @property {string|number|boolean|array} on Value to filter on when checked.
-   * @property {string|number|boolean|array} off Value to filter on when unchecked.
-   * element (when using the default template). By default when switching to `off`, no refinement will be asked. So you
-   * will get both `true` and `false` results. If you set the off value to `false` then you will get only objects
-   * having `false` has a value for the selected attribute.
-   * @property {ToggleWidgetTemplates} [templates] Templates to use for the widget.
-   * @property {ToggleWidgetCSSClasses} [cssClasses] CSS classes to add.
-   */
 
   /**
    * The toggleRefinement widget lets the user either:
@@ -19853,27 +19897,8 @@
    * The attribute passed to `attribute` must be declared as an
    * [attribute for faceting](https://www.algolia.com/doc/guides/searching/faceting/#declaring-attributes-for-faceting)
    * in your Algolia settings.
-   *
-   * @type {WidgetFactory}
-   * @devNovel ToggleRefinement
-   * @category filter
-   * @param {ToggleWidgetParams} widgetParams Options for the ToggleRefinement widget.
-   * @return {Widget} A new instance of the ToggleRefinement widget
-   * @example
-   * search.addWidgets([
-   *   instantsearch.widgets.toggleRefinement({
-   *     container: '#free-shipping',
-   *     attribute: 'free_shipping',
-   *     on: true,
-   *     templates: {
-   *       labelText: 'Free shipping'
-   *     }
-   *   })
-   * ]);
    */
-
-
-  function toggleRefinement(widgetParams) {
+  var toggleRefinement = function toggleRefinement(widgetParams) {
     var _ref3 = widgetParams || {},
         container = _ref3.container,
         attribute = _ref3.attribute,
@@ -19886,7 +19911,7 @@
         off = _ref3.off;
 
     if (!container) {
-      throw new Error(withUsage$I('The `container` option is required.'));
+      throw new Error(withUsage$J('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -19918,9 +19943,9 @@
     })), {}, {
       $$widgetType: 'ais.toggleRefinement'
     });
-  }
+  };
 
-  var withUsage$J = createDocumentationMessageGenerator({
+  var withUsage$K = createDocumentationMessageGenerator({
     name: 'analytics'
   });
 
@@ -19938,7 +19963,7 @@
         pushPagination = _ref$pushPagination === void 0 ? false : _ref$pushPagination;
 
     if (!pushFunction) {
-      throw new Error(withUsage$J('The `pushFunction` option is required.'));
+      throw new Error(withUsage$K('The `pushFunction` option is required.'));
     }
 
      _warning(false, "`analytics` widget has been deprecated. It is still supported in 4.x releases, but not further. It is replaced by the `insights` middleware.\n\nFor the migration, visit https://www.algolia.com/doc/guides/building-search-ui/upgrade-guides/js/#analytics-widget") ;
@@ -20140,7 +20165,7 @@
     separator: '>'
   };
 
-  var withUsage$K = createDocumentationMessageGenerator({
+  var withUsage$L = createDocumentationMessageGenerator({
     name: 'breadcrumb'
   });
   var suit$m = component('Breadcrumb');
@@ -20190,7 +20215,7 @@
         userCssClasses = _ref3$cssClasses === void 0 ? {} : _ref3$cssClasses;
 
     if (!container) {
-      throw new Error(withUsage$K('The `container` option is required.'));
+      throw new Error(withUsage$L('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -20282,7 +20307,7 @@
     defaultOption: 'See all'
   };
 
-  var withUsage$L = createDocumentationMessageGenerator({
+  var withUsage$M = createDocumentationMessageGenerator({
     name: 'menu-select'
   });
   var suit$n = component('MenuSelect');
@@ -20330,7 +20355,7 @@
         transformItems = _ref3.transformItems;
 
     if (!container) {
-      throw new Error(withUsage$L('The `container` option is required.'));
+      throw new Error(withUsage$M('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -20408,7 +20433,7 @@
   };
 
   var suit$o = component('PoweredBy');
-  var withUsage$M = createDocumentationMessageGenerator({
+  var withUsage$N = createDocumentationMessageGenerator({
     name: 'powered-by'
   });
 
@@ -20470,7 +20495,7 @@
         theme = _ref3$theme === void 0 ? 'light' : _ref3$theme;
 
     if (!container) {
-      throw new Error(withUsage$M('The `container` option is required.'));
+      throw new Error(withUsage$N('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -20570,7 +20595,7 @@
     }));
   }
 
-  var withUsage$N = createDocumentationMessageGenerator({
+  var withUsage$O = createDocumentationMessageGenerator({
     name: 'panel'
   });
   var suit$p = component('Panel');
@@ -20649,23 +20674,21 @@
     };
     return function (widgetFactory) {
       return function (widgetParams) {
-        var _ref4 = widgetParams || {},
-            container = _ref4.container;
-
-        if (!container) {
-          throw new Error(withUsage$N("The `container` option is required in the widget within the panel."));
+        if (!(widgetParams && widgetParams.container)) {
+          throw new Error(withUsage$O("The `container` option is required in the widget within the panel."));
         }
 
+        var containerNode = getContainerNode(widgetParams.container);
         var defaultTemplates = {
           header: '',
           footer: '',
-          collapseButtonText: function collapseButtonText(_ref5) {
-            var isCollapsed = _ref5.collapsed;
+          collapseButtonText: function collapseButtonText(_ref4) {
+            var isCollapsed = _ref4.collapsed;
             return "<svg\n          class=\"".concat(cssClasses.collapseIcon, "\"\n          width=\"1em\"\n          height=\"1em\"\n          viewBox=\"0 0 500 500\"\n        >\n        <path d=\"").concat(isCollapsed ? 'M100 250l300-150v300z' : 'M250 400l150-300H100z', "\" fill=\"currentColor\" />\n        </svg>");
           }
         };
         var renderPanel = renderer$l({
-          containerNode: getContainerNode(container),
+          containerNode: containerNode,
           bodyContainerNode: bodyContainerNode,
           cssClasses: cssClasses,
           templates: _objectSpread2(_objectSpread2({}, defaultTemplates), templates)
@@ -20678,10 +20701,14 @@
         });
         var widget = widgetFactory(_objectSpread2(_objectSpread2({}, widgetParams), {}, {
           container: bodyContainerNode
-        }));
+        })); // TypeScript somehow loses track of the ...widget type, since it's
+        // not directly returned. Eventually the "as ReturnType<typeof widgetFactory>"
+        // will not be needed anymore.
+        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+
         return _objectSpread2(_objectSpread2({}, widget), {}, {
           dispose: function dispose() {
-            I(null, getContainerNode(container));
+            I(null, containerNode);
 
             if (typeof widget.dispose === 'function') {
               var _widget$dispose;
@@ -20800,7 +20827,7 @@
     status: "<p>{{transcript}}</p>"
   };
 
-  var withUsage$O = createDocumentationMessageGenerator({
+  var withUsage$P = createDocumentationMessageGenerator({
     name: 'voice-search'
   });
   var suit$q = component('VoiceSearch');
@@ -20837,7 +20864,7 @@
         createVoiceSearchHelper = _ref2.createVoiceSearchHelper;
 
     if (!container) {
-      throw new Error(withUsage$O('The `container` option is required.'));
+      throw new Error(withUsage$P('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -20884,7 +20911,7 @@
     });
   };
 
-  var withUsage$P = createDocumentationMessageGenerator({
+  var withUsage$Q = createDocumentationMessageGenerator({
     name: 'query-rule-custom-data'
   });
   var suit$r = component('QueryRuleCustomData');
@@ -20915,7 +20942,7 @@
     } : _ref2$transformItems;
 
     if (!container) {
-      throw new Error(withUsage$P('The `container` option is required.'));
+      throw new Error(withUsage$Q('The `container` option is required.'));
     }
 
     var cssClasses = {
@@ -20944,7 +20971,7 @@
     });
   };
 
-  var withUsage$Q = createDocumentationMessageGenerator({
+  var withUsage$R = createDocumentationMessageGenerator({
     name: 'query-rule-context'
   });
 
@@ -20952,7 +20979,7 @@
     var widgetParams = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     if (!widgetParams.trackedFilters) {
-      throw new Error(withUsage$Q('The `trackedFilters` option is required.'));
+      throw new Error(withUsage$R('The `trackedFilters` option is required.'));
     }
 
     return _objectSpread2(_objectSpread2({}, connectQueryRules(noop)(widgetParams)), {}, {
@@ -21109,7 +21136,7 @@
     })));
   };
 
-  var withUsage$R = createDocumentationMessageGenerator({
+  var withUsage$S = createDocumentationMessageGenerator({
     name: 'answers'
   });
   var suit$s = component('Answers');
@@ -21158,7 +21185,7 @@
         userCssClasses = _ref3$cssClasses === void 0 ? {} : _ref3$cssClasses;
 
     if (!container) {
-      throw new Error(withUsage$R('The `container` option is required.'));
+      throw new Error(withUsage$S('The `container` option is required.'));
     }
 
     var containerNode = getContainerNode(container);
@@ -21249,7 +21276,7 @@
     }
   };
 
-  var withUsage$S = createDocumentationMessageGenerator({
+  var withUsage$T = createDocumentationMessageGenerator({
     name: 'relevant-sort'
   });
   var suit$t = component('RelevantSort');
@@ -21279,7 +21306,7 @@
         userCssClasses = _widgetParams$cssClas === void 0 ? {} : _widgetParams$cssClas;
 
     if (!container) {
-      throw new Error(withUsage$S('The `container` option is required.'));
+      throw new Error(withUsage$T('The `container` option is required.'));
     }
 
     var cssClasses = {
@@ -21304,6 +21331,73 @@
       templates: templates
     })), {}, {
       $$widgetType: 'ais.relevantSort'
+    });
+  };
+
+  var withUsage$U = createDocumentationMessageGenerator({
+    name: 'dynamic-widgets'
+  });
+  var suit$u = component('DynamicWidgets');
+
+  var dynamicWidgets = function dynamicWidgets(widgetParams) {
+    var _ref = widgetParams || {},
+        containerSelector = _ref.container,
+        transformItems = _ref.transformItems,
+        widgets = _ref.widgets;
+
+    if (!containerSelector) {
+      throw new Error(withUsage$U('The `container` option is required.'));
+    }
+
+    if (!widgets || !Array.isArray(widgets) || widgets.some(function (widget) {
+      return typeof widget !== 'function';
+    })) {
+      throw new Error(withUsage$U('The `widgets` option expects an array of callbacks.'));
+    }
+
+    var userContainer = getContainerNode(containerSelector);
+    var rootContainer = document.createElement('div');
+    rootContainer.className = suit$u();
+    var containers = new Map();
+    var connectorWidgets = [];
+    var makeWidget = connectDynamicWidgets(function (_ref2, isFirstRender) {
+      var attributesToRender = _ref2.attributesToRender;
+
+      if (isFirstRender) {
+        userContainer.appendChild(rootContainer);
+      }
+
+      attributesToRender.forEach(function (attribute) {
+        if (!containers.has(attribute)) {
+          return;
+        }
+
+        var container = containers.get(attribute);
+        rootContainer.appendChild(container);
+      });
+    }, function () {
+      userContainer.removeChild(rootContainer);
+    });
+    var widget = makeWidget({
+      transformItems: transformItems,
+      widgets: connectorWidgets
+    });
+    return _objectSpread2(_objectSpread2({}, widget), {}, {
+      init: function init(initOptions) {
+        widgets.forEach(function (cb) {
+          var container = document.createElement('div');
+          container.className = suit$u({
+            descendantName: 'widget'
+          });
+          rootContainer.appendChild(container);
+          var childWidget = cb(container);
+          var attribute = getWidgetAttribute(childWidget, initOptions);
+          containers.set(attribute, container);
+          connectorWidgets.push(childWidget);
+        });
+        widget.init(initOptions);
+      },
+      $$widgetType: 'ais.dynamicWidgets'
     });
   };
 
@@ -21342,7 +21436,8 @@
     index: index,
     places: placesWidget,
     EXPERIMENTAL_answers: answersWidget,
-    relevantSort: relevantSort
+    relevantSort: relevantSort,
+    EXPERIMENTAL_dynamicWidgets: dynamicWidgets
   });
 
   var createInsightsMiddleware = function createInsightsMiddleware(props) {
@@ -21393,7 +21488,7 @@
         queuedUserToken = _ref4[1];
       }
 
-      insightsClient('_get', '_userToken', function (userToken) {
+      insightsClient('getUserToken', null, function (_error, userToken) {
         // If user has called `aa('setUserToken', 'my-user-token')` before creating
         // the `insights` middleware, we store them temporarily and
         // set it later on.
@@ -21408,14 +21503,19 @@
       return {
         onStateChange: function onStateChange() {},
         subscribe: function subscribe() {
-          // At the time this middleware is subscribed, `mainIndex.init()` is already called.
+          insightsClient('addAlgoliaAgent', 'insights-middleware'); // At the time this middleware is subscribed, `mainIndex.init()` is already called.
           // It means `mainIndex.getHelper()` exists.
+
           var helper = instantSearchInstance.mainIndex.getHelper();
 
           var setUserTokenToSearch = function setUserTokenToSearch(userToken) {
             if (userToken) {
               helper.setState(helper.state.setQueryParameter('userToken', userToken));
             }
+          };
+
+          var hasUserToken = function hasUserToken() {
+            return Boolean(helper.state.userToken);
           };
 
           helper.setState(helper.state.setQueryParameter('clickAnalytics', true));
@@ -21444,7 +21544,11 @@
             if (onEvent) {
               onEvent(event, _insightsClient);
             } else if (event.insightsMethod) {
-              insightsClient(event.insightsMethod, event.payload);
+              if (hasUserToken()) {
+                insightsClient(event.insightsMethod, event.payload);
+              } else {
+                 _warning(false, "\nCannot send event to Algolia Insights because `userToken` is not set.\n\nSee documentation: https://www.algolia.com/doc/guides/building-search-ui/going-further/send-insights-events/js/#setting-the-usertoken\n") ;
+              }
             } else {
                _warning(false, 'Cannot send event to Algolia Insights because `insightsMethod` option is missing.') ;
             }

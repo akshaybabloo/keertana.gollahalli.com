@@ -371,10 +371,10 @@ bindings@^1.5.0:
   dependencies:
     file-uri-to-path "1.0.0"
 
-bootstrap@^5.0.0-beta3:
-  version "5.0.0-beta3"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.0.0-beta3.tgz#c959f61fbd03667a1b158f763856994859d7a465"
-  integrity sha512-0urccjfIOzhrb9qJysN8XW/DRw6rg3zH7qLeKIp4Zyl8+Ens4JWB0NC0cB5AhnSFPd2tftRggjwCMxablo6Tpg==
+bootstrap@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.0.1.tgz#e7939d599119dc818a90478a2a299bdaff037e09"
+  integrity sha512-Fl79+wsLOZKoiU345KeEaWD0ik8WKRI5zm0YSPj2oF1Qr+BO7z0fco6GbUtqjoG1h4VI89PeKJnMsMMVQdKKTw==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -1237,9 +1237,9 @@ homedir-polyfill@^1.0.1:
     parse-passwd "^1.0.0"
 
 hosted-git-info@^2.1.4:
-  version "2.8.8"
-  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.8.tgz#7539bd4bc1e0e0a895815a2e0262420b12858488"
-  integrity sha512-f/wzC2QaWBs7t9IYqB4T3sR1xviIViXJRJTWBlx2Gf3g0Xi5vI7Yy4koXQ1c9OYDGHN9sBy1DQ2AB8fqZBWhUg==
+  version "2.8.9"
+  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.9.tgz#dffc0bf9a21c02209090f2aa69429e1414daf3f9"
+  integrity sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==
 
 ignore@^5.1.4:
   version "5.1.8"
@@ -1269,10 +1269,10 @@ ini@^1.3.4:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
 
-instantsearch.js@^4.9.1:
-  version "4.21.0"
-  resolved "https://registry.yarnpkg.com/instantsearch.js/-/instantsearch.js-4.21.0.tgz#3eec6b596795af7ec534d510fef58f36236a87e5"
-  integrity sha512-SgA7wRyicP8Uwdomp0dNQY9rWIjRSuTfyPgQ6GjRuYT7k8pfC7scHpC9CSfsTi6d0FTV18Psk+citFDRhXlffg==
+instantsearch.js@^4.22.0:
+  version "4.22.0"
+  resolved "https://registry.yarnpkg.com/instantsearch.js/-/instantsearch.js-4.22.0.tgz#d28c7a2be6b399736f8f2edd6f59d474a0f661a4"
+  integrity sha512-IPjg/EwhDqFpvCJC1g3DF+i2cAr3SQZ9JPFhuKWC2apnGNfiFkPIQKvHx1pFTQm7FlZe262Xcpqi1ag1KVPGpA==
   dependencies:
     "@types/googlemaps" "^3.39.6"
     algoliasearch-helper "^3.4.4"
