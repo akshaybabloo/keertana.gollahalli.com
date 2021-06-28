@@ -1,10 +1,19 @@
 Experience:
   - title: "Dental Assistant"
     current: true
+    where: "Lumino City Dental at Quay Park"
+    location: "Auckland, New Zealand"
+    from: "2021-05-18"
+    to: "Present"
+    description:
+      - "Assisting Dr. Lincoln Miranda with various chair-side dental procedures including Digital Smile Design (DSD) cases, Endodontic and cosmetic procedures"
+
+  - title: "Dental Assistant"
+    current: false
     where: "Endodontic Solutions"
     location: "Auckland, New Zealand"
     from: "2020-09-01"
-    to: "Present"
+    to: "2021-05-15"
     description:
       - "Assisting Dr. Hani Naoum in a shared role for various chairside specialist endodontic procedures."
       - "Assisting Dr. Hani Naoum with endodontic procedures performed and monitoring of patients under IV sedation."
