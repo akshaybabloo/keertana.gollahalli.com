@@ -13,4 +13,4 @@ I am currently working as a Dental Assistant (licensing exams take up your life 
 
 I am a very passionate and talkative person, through and through Potterhead. My hobbies include reading (a LOT), writing, binging Harry Potter and Friends, dancing and Dentistry. 
 
-When I was first entered the field of Dentistry, I was baffled by the concept of having to study 32 teeth for 5 years and then some! I started with a thousand questions and 8 years later, I have a thousand more. With this page, I hope to address some of those questions and help my fellow budding Dentists. 
+When I first entered the field of Dentistry, I was baffled by the concept of having to study 32 teeth for 5 years and then some! I started with a thousand questions and 8 years later, I have a thousand more. With this page, I hope to address some of those questions and help my fellow budding Dentists. 
