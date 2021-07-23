@@ -1,33 +1,15 @@
 {
-	"name": "keertana",
+	"name": "Keertana Gollahalli",
+	"short_name": "Keertana",
+	"description": "Hi! My name is Keertana, and I am just your friendly neighbourhood Dentist (or maybe slightly far away, at the end of the world)",
+	"display": "standalone",
+	"background_color": "#000000",
+	"start_url": "https://keertana.gollahalli.com",
+  	"theme_color": "#000000",
 	"icons": [
 		{
-			"src": "\/img\/icons\/favicon-36.png",
-			"sizes": "36x36",
-			"type": "image\/png",
-			"density": 0.75
-		},
-		{
-			"src": "\/img\/icons\/favicon-48.png",
-			"sizes": "48x48",
-			"type": "image\/png",
-			"density": 1
-		},
-		{
-			"src": "\/img\/icons\/favicon-72.png",
-			"sizes": "72x72",
-			"type": "image\/png",
-			"density": 1.5
-		},
-		{
-			"src": "\/img\/icons\/favicon-96.png",
-			"sizes": "96x96",
-			"type": "image\/png",
-			"density": 2
-		},
-		{
-			"src": "\/img\/icons\/favicon-144.png",
-			"sizes": "144x144",
+			"src": "\/img\/icons\/favicon-180-precomposed.png",
+			"sizes": "180x180",
 			"type": "image\/png",
 			"density": 3
 		},
