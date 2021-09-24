@@ -8,7 +8,7 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
-    "bootstrap": "^5.1.0",
+    "bootstrap": "^5.1.1",
     "firacode": "^5.2.0"
   },
   "devDependencies": {
