@@ -5,7 +5,7 @@ draft: false
 categories: []
 tags: ["dentistry"]
 description: "Once up on a time in a far away land lived a man who fixed teeth for a living. One day a passerby stopped to ask his neighbour, \"Who is that guy?\". \"He is a Dentist\", the neighbour replied"
-images: ["/img/blog/dentis-or-doctor/dentist-or-doctor.png"]
+images: ["/img/blog/dentis-or-doctor/dentist-or-doctor.jpg"]
 ads: true
 # htmlScripts: []
 author:
@@ -21,7 +21,7 @@ sitemap:
     priority: 0.8
     changeFreq: monthly
 siteMapImages:
-  - imageLoc: "/img/blog/dentis-or-doctor/dentist-or-doctor.png"
+  - imageLoc: "/img/blog/dentis-or-doctor/dentist-or-doctor.jpg"
     imageCaption: ""
 ---
 
