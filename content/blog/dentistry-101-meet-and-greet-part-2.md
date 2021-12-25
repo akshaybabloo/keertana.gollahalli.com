@@ -29,21 +29,20 @@ It isn’t enough to just know how to treat a patient at the first visit, it is 
 
 Listed out are the basic steps to follow when taking a patient’s history –  
 
-1. _Introduce yourself and gain consent (So they find you more approachable)_ - Confirm the patient’s identity and take note of who is accompanying them, their age, mental capacity to understand the conversation and to answer your questions regarding their medical history.  
-   
+1. _Introduce yourself and gain consent (So they find you more approachable)_ - Confirm the patient’s identity and take note of who is accompanying them, their age, mental capacity to understand the conversation and to answer your questions regarding their medical history.
 2. _Chief complaint_ - this is the main reason for them to be sitting in front of you (Not just your cool personality :exploding_head:). There could be a variety of reasons – cosmetic, functional, pain, or paranoia.
 3. _History of Presenting Illness (HPI)_ – this step is needed to elaborate the chief complaint of the patient. Assess the type of pain they are experiencing. This allows us to formulate a provisional diagnosis (Tentative diagnosis made prior to any confirming tests performed. Eg. Someone comes to you and says they have lost their sense of smell and taste. You immediately suspect COVID19, this is your “provisional diagnosis”, but you still need to wait for test results, to confirm and express your “final diagnosis”). You could either have your own list of questions or use this simple acronym to prevent missing out of any details. 
 
-“SOCRATES” [1] –  
+    “SOCRATES” [1] –  
 
-- **S**ite (where is the pain) – pain from a tooth, from the jaw, from the ear, from the inside of the cheek, etc. 
-- **O**nset (when did it start) – right after eating hot pizza, spontaneously in the middle of the night, ever since I finished that bag of Doritos.  
-- **C**haracter (description of the pain) – dull, throbbing, pulsating, etc.  
-- **R**adiation (is the pain radiating elsewhere) – head, ear, etc. 
-- **A**ssociations - nausea, fever 
-- **T**ime - how long does the pain last, does it keep you up at night 
-- **E**xacerbating/ relieving factors - are they taking any painkillers, do cold/warm compresses help 
-- **S**everity - rate the pain on a scale of 1-10 (you can also use smileys!)  
+    - **S**ite (where is the pain) – pain from a tooth, from the jaw, from the ear, from the inside of the cheek, etc. 
+    - **O**nset (when did it start) – right after eating hot pizza, spontaneously in the middle of the night, ever since I finished that bag of Doritos.  
+    - **C**haracter (description of the pain) – dull, throbbing, pulsating, etc.  
+    - **R**adiation (is the pain radiating elsewhere) – head, ear, etc. 
+    - **A**ssociations - nausea, fever 
+    - **T**ime - how long does the pain last, does it keep you up at night 
+    - **E**xacerbating/ relieving factors - are they taking any painkillers, do cold/warm compresses help 
+    - **S**everity - rate the pain on a scale of 1-10 (you can also use smileys!)  
 
 4. _Medical History_ – knowing any existing conditions is one of the most important aspects of taking history. Medical history is not just taken at the first appointment and then forgotten about. It is mandatory to check in with the patient periodically (6 months to 1 year or anytime you feel there is a significant change in a patient’s health – eg. Davis was 102 kgs when he saw you 3 months ago, he returned today to complete his fillings and he looks significantly slimmer, and he informs you that he now weighs 70kgs). For female patients of child-bearing age, it is important to ask if they are pregnant (or even if they suspect that they might be).  
 
