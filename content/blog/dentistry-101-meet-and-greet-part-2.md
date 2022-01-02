@@ -1,7 +1,7 @@
 ---
 title: "Dentistry 101: Meet and Greet - Part-2"
 date: 2021-12-24T14:45:28+13:00
-draft: true
+draft: false
 categories: []
 tags: ["dentistry"]
 description: "Yes, it’s slightly long. Yes, you got to read it because it’s informative (No, I’m not being obnoxious)"
