@@ -68,4 +68,7 @@ blockquote {
 
 a {
   color: white;
+  &:hover {
+    color: whitesmoke;
+  }
 }
