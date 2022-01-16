@@ -17,7 +17,7 @@
 <link rel="icon" sizes="192x192" href="/img/icons/favicon-192.png">
 
 {{ $sassTemplate := resources.Get "scss/custom.scss" }}
-{{ $style := $sassTemplate | resources.ExecuteAsTemplate "main.scss" . | resources.ToCSS | resources.Minify }}
+{{ $style := $sassTemplate | resources.ExecuteAsTemplate "css/main.scss" . | resources.ToCSS | resources.Minify }}
 <link rel="stylesheet" href="{{ $style.Permalink }}">
 
 {{ template "_internal/google_analytics.html" . }}
