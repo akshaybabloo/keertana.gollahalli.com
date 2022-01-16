@@ -14,8 +14,8 @@
         </div>
         {{ if .Params.images }}
             <div class="row">
-                <div class="col-md-4 px-0 mx-auto">
-                    <img src="{{ index .Params.images 0 }}" class="img-fluid" height="100" alt="{{.Title}}">
+                <div class="col px-0 text-center">
+                    <img src="{{ index .Params.images 0 }}" class="img-fluid" alt="{{.Title}}">
                 </div>
             </div>
         {{end}}
