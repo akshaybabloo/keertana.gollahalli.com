@@ -58,3 +58,14 @@ body {
 
   width: 150px;
 }
+
+blockquote {
+  border-left: 7px solid #b83131;
+  margin: 1.5em 25px;
+  padding: 1px 10px;
+  quotes:"\201C""\201D""\2018""\2019";
+}
+
+a {
+  color: white;
+}
