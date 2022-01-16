@@ -54,11 +54,11 @@ A detailed consent form for any procedure should include – Images, description
 
 All this excessive, never-ending paperwork just to save your own neck? No, not really. You are also protecting your work environment, your colleagues and most of all, the patient. Every step is a necessity, and every inch gained is one step closer to your ultimate goal, to do your part in helping the world smile once again. 
 
-## Consent Example Form
+## Consent Form Template
 
-![Consent Page - 1](/img/blog/dentistry-101/consent/consent-p1.png)
-![Consent Page - 2](/img/blog/dentistry-101/consent/consent-p2.png)
-![Consent Page - 3](/img/blog/dentistry-101/consent/consent-p3.png)
+[{{< figure src="/img/blog/dentistry-101/consent/consent-p1.png" caption="Consent Page - 1" width="150" >}}](/img/blog/dentistry-101/consent/consent-p1.png)
+[{{< figure src="/img/blog/dentistry-101/consent/consent-p2.png" caption="Consent Page - 2" width="150" >}}](/img/blog/dentistry-101/consent/consent-p2.png)
+[{{< figure src="/img/blog/dentistry-101/consent/consent-p3.png" caption="Consent Page - 3" width="150" >}}](/img/blog/dentistry-101/consent/consent-p3.png)
 
 References - 
 
