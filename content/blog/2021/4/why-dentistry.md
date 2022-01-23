@@ -2,7 +2,7 @@
 title: "Why Dentistry?"
 date: 2021-04-20T13:05:47+12:00
 draft: false
-categories: []
+categories: ["Dental Education"]
 tags: ["dentistry"]
 description: "Why choose dentistry as your next career path"
 images: ["/img/blog/why-dentistry/dentistry.jpg"]

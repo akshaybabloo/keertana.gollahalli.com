@@ -2,7 +2,7 @@
 title: "Future in Dentistry"
 date: 2021-09-25T18:20:49+12:00
 draft: false
-categories: []
+categories: ["Dental Education"]
 tags: ["dentistry"]
 description: "A reality check"
 images: ["/img/blog/future-in-dentistry/money-man.jpg"]
