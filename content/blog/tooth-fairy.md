@@ -1,7 +1,7 @@
 ---
 title: "Tooth Fairy"
 date: 2022-01-23T13:12:31+13:00
-draft: true
+draft: false
 categories: ["Myths and Legends"]
 tags: ["Myths and Legends"]
 description: "What is a myth but just warped reality"
