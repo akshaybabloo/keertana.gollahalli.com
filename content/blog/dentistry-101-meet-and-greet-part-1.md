@@ -2,8 +2,8 @@
 title: "Dentistry 101: Meet and Greet - Part-1"
 date: 2021-12-24T14:40:16+13:00
 draft: false
-categories: []
-tags: ["dentistry"]
+categories: ["Dentistry 101"]
+tags: ["Dentistry 101"]
 description: "They say the first impression is the last impression. I say the first impression is never the \"lasting\" impression"
 images: ["/img/blog/dentistry-101/fist-bump.jpg"]
 ads: true

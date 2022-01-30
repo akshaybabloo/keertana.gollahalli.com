@@ -2,8 +2,8 @@
 title: "Dentistry 101: Informed Consent"
 date: 2022-01-16T17:23:59+13:00
 draft: false
-categories: []
-tags: ["dentistry"]
+categories: ["Dentistry 101"]
+tags: ["Dentistry 101"]
 description: "No means No, Maybe means No, Probably means No, I don't know means No. Only Yes means Yes!"
 images: ["/img/blog/dentistry-101/consent.jpg"]
 ads: true

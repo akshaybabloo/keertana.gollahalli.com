@@ -2,7 +2,7 @@
 title: "Dentist or Doctor?"
 date: 2021-11-01T01:20:30+13:00
 draft: false
-categories: []
+categories: ["Dental Education"]
 tags: ["dentistry"]
 description: "Once up on a time in a far away land lived a man who fixed teeth for a living. One day a passerby stopped to ask his neighbour, \"Who is that guy?\". \"He is a Dentist\", the neighbour replied"
 images: ["/img/blog/dentis-or-doctor/dentist-or-doctor.jpg"]
