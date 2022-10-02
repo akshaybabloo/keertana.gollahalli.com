@@ -1,5 +1,4 @@
 const {src, dest, parallel, series} = require('gulp');
-const del = require('del');
 
 // Following are the default paths that the files will be moved to
 const cssFolderPath = './themes/Indigo/static/css/';
@@ -19,10 +18,6 @@ const fontFilesToMove = [
     './node_modules/firacode/distr/woff2/FiraCode-Regular.woff2'
 ];
 
-function cleanAssets() {
-    return del(['themes/Indigo/static'])
-}
-
 // Moves CSS files to their appropriate location
 function moveCss() {
     return src(cssFilesToMove).pipe(dest(cssFolderPath));
@@ -39,4 +34,4 @@ function moveFont() {
 }
 
 // Run both functions in parallel
-exports.default = series(cleanAssets, parallel(moveCss, moveJs, moveFont));
+exports.default = parallel(moveCss, moveJs, moveFont);
