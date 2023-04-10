@@ -23,7 +23,7 @@
                     <div class="col-md-3 my-2">
                         {{ range .Params.categories }} <span class="badge bg-danger">#{{.}}</span> {{end}}
                         <br>
-                        <small class="none">
+                        <small class="d-none">
                             <time datetime="{{.PublishDate}}"
                                   itemprop="datePublished">{{.PublishDate.Format "January 2, 2006"}}</time>
                         </small>

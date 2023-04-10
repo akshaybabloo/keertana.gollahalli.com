@@ -1,10 +1,19 @@
 Experience:
-  - title: "Dental Assistant"
+  - title: "Surgical Assistant"
     current: true
+    where: "Institute of Dental Implants and Periodontics"
+    location: "Auckland, New Zealand"
+    from: "2023-01-16"
+    to: "Present"
+    description:
+      - "Assisting Dr. Michael Danesh-Meyer and Dr. Andrew Liaw with various chair-side surgical dental procedures including implant placement, bone & soft tissue grafting, mucogingival surgery, and sinus lift procedures."
+  
+  - title: "Dental Assistant"
+    current: false
     where: "Lumino City Dental at Quay Park"
     location: "Auckland, New Zealand"
     from: "2021-05-18"
-    to: "Present"
+    to: "2022-12-22"
     description:
       - "Assisting Dr. Fabricio Pacheco with various chair-side general & surgical dental procedures including implant placement, bone and soft tissue grafting."
       - "Assisted Dr. Lincoln Miranda with various chair-side dental procedures including Digital Smile Design (DSD) cases, Endodontic and cosmetic procedures"
