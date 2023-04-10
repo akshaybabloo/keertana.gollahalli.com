@@ -37,9 +37,9 @@ outputs:
 params:
   title: 'Dr Keertana Gollahalli'
   images:
-    - 'img/keertana-photo.jpeg'
+    - 'img/keertana-photo.jpg'
   linkedin: 'https://www.linkedin.com/in/drkeertana/'
-  photo: '/img/keertana-photo.jpeg'
+  photo: '/img/keertana-photo.jpg'
   email: 'keertana@gollahalli.com'
   description: 'Hi! My name is Keertana, and I am just your friendly neighbourhood Dentist (or maybe slightly far away, at the end of the world)'
   cloudflareInsight: '107cda45c47644b4bf2d025b603af92d'
