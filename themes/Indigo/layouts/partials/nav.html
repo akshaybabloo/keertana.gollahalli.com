@@ -9,7 +9,7 @@
             </button>
 
             <div class="collapse navbar-collapse justify-content-md-center" id="navbar">
-                <ul class="navbar-nav h3">
+                <ul class="navbar-nav h4">
                     {{ range .Site.Menus.main }}
                         <li class="nav-item">
                             <a class="nav-link {{ if $currentPage.IsMenuCurrent "main" . }}active{{end}}" aria-current="page" href="{{ .URL }}">{{ .Name }}</a>
