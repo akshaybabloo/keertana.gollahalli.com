@@ -42,7 +42,7 @@ outputs:
     - 'AMP'
 
 params:
-  title: 'Dr Keertana Gollahalli'
+  title: 'Dr Keertana Tipparaju Gollahalli'
   images:
     - 'img/keertana-photo.jpg'
   linkedin: 'https://www.linkedin.com/in/drkeertana/'
