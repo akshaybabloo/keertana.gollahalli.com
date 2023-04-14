@@ -1,4 +1,11 @@
 {{ define "head" }}
+    {{/* TODO: add pagination */}}
+    {{ range $index, $element := .Pages }}
+        {{ if .Params.images }}
+            <link rel="preload" href="{{ index .Params.images 0 }}" as="image">
+        {{ end }}
+    {{ end }}
+
     {{ partial "schema/website.html" . }}
 {{ end }}
 

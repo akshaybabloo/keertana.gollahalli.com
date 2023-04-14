@@ -2,6 +2,8 @@
 <html lang="en" class="h-100">
 <head>
     {{- partial "head.html" . -}}
+    <link rel="preload" href="{{ (resources.Get "img/logo.svg").RelPermalink }}" as="image">
+    <link rel="preload" href="{{(resources.Get .Site.Params.photo).RelPermalink}}" as="image">
 </head>
 
 <body class="h-100">
@@ -9,7 +11,7 @@
 {{ partial "nav.html" . }}
 
 <main class="container h-100 d-flex fs-5">
-    <div class="row text-white rounded-3 align-self-center justify-content-center align-items-center shadow-lg bg-blur mx-auto">
+    <div class="row text-white rounded-3 align-self-center justify-content-center align-items-center shadow-lg bg-blur mx-auto border border-2 border-dark">
         <div class="col-md">
             <div class="text-center p-lg-5 pt-3">
                 <h1 hidden>{{.Site.Params.title}}</h1>
@@ -19,7 +21,7 @@
             </div>
         </div>
         <div class="col-md-auto text-center p-0">
-            <img src="{{(resources.Get .Site.Params.photo).RelPermalink}}" class="img-fluid rounded-3 float-lg-end" width="300"
+            <img src="{{(resources.Get .Site.Params.photo).RelPermalink}}" class="img-fluid rounded-end float-lg-end" width="300"
                  alt="{{.Site.Title}}">
         </div>
     </div>

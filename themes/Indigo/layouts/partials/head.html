@@ -1,7 +1,17 @@
-<meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+{{ if eq (getenv "HUGO_ENV") "production" }}
+    <link rel="preload" href="/css/main.min.css" as="style">
+{{ end }}
+
+{{ if eq (getenv "HUGO_ENV") "production" }}
+    <link rel="preload" href="/js/bootstrap.bundle.min.js" as="script">
+    <link rel="preload" href="/js/fontawesome.min.js" as="script">
+    <link rel="preload" href="/js/brands.min.js" as="script">
+{{ end }}
+
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
 <meta name="author" content="{{.Site.Params.title}}" />
 
