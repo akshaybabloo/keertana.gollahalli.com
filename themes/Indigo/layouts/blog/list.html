@@ -15,8 +15,14 @@
             <div class="col"><h1>{{.Title}}</h1></div>
         </div>
 
-        {{ range (.Paginate (.Pages.GroupByPublishDate "2006")).PageGroups }}
-            {{ range $index, $element := .Pages }}
+        {{ $pageGroup := (.Paginate (.Pages.GroupByPublishDate "2006")).PageGroups }}
+        {{ $lenPageGroup := len $pageGroup }}
+
+        {{ range $pageGroupIndex, $pageGroupElement := $pageGroup }}
+            {{ $pages := $pageGroupElement.Pages}}
+            {{$lenPages := len $pages}}
+
+            {{ range $pageIndex, $pageElement := $pages }}
                 <article class="row mt-3">
                     {{ if .Params.images }}
                         <div class="row my-2">
@@ -40,7 +46,9 @@
                         <p>{{.Description}}</p>
                     </div>
                 </article>
-                <hr>
+                {{ if or (ne $lenPageGroup (add $pageGroupIndex 1)) (ne $lenPages (add $pageIndex 1)) }}
+                    <hr>
+                {{end}}
             {{end}}
         {{end}}
         {{ partial "pagination.html" . }}
