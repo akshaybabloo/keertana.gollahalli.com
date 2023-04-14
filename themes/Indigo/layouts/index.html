@@ -2,6 +2,8 @@
 <html lang="en" class="h-100">
 <head>
     {{- partial "head.html" . -}}
+    <link rel="preload" href="{{ (resources.Get "img/logo.svg").RelPermalink }}" as="image">
+    <link rel="preload" href="{{(resources.Get .Site.Params.photo).RelPermalink}}" as="image">
 </head>
 
 <body class="h-100">
