@@ -1,18 +1,25 @@
 {
   "name": "keertana.gollahalli.com",
   "version": "1.0.0",
+  "description": "Keertana's website",
   "main": "index.js",
   "repository": "https://github.com/akshaybabloo/keertana.gollahalli.com.git",
   "author": "Akshay Raj Gollahalli <akshay@gollahalli.com>",
   "license": "MIT",
   "private": true,
+  "workspaces": [
+    "themes/Indigo"
+  ],
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.4.0",
-    "bootstrap": "^5.2.3",
-    "firacode": "^6.2.0"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0"
+  },
+  "scripts": {
+    "build": "yarn workspace indigo build",
+    "build:dev": "yarn workspace indigo build:dev",
+    "build:prod": "yarn workspace indigo build:prod",
+    "watch": "yarn workspace indigo watch"
   }
 }

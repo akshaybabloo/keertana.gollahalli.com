@@ -8,3 +8,17 @@ yarn-error.log
 /public/
 
 .hugo_build.lock
+/dist/
+themes/Indigo/static/css/main.css
+themes/Indigo/static/css/main.min.css
+themes/Indigo/static/fonts/roboto-all-400-normal.woff
+themes/Indigo/static/fonts/roboto-cyrillic-400-normal.woff2
+themes/Indigo/static/fonts/roboto-cyrillic-ext-400-normal.woff2
+themes/Indigo/static/fonts/roboto-greek-400-normal.woff2
+themes/Indigo/static/fonts/roboto-greek-ext-400-normal.woff2
+themes/Indigo/static/fonts/roboto-latin-400-normal.woff2
+themes/Indigo/static/fonts/roboto-latin-ext-400-normal.woff2
+themes/Indigo/static/fonts/roboto-vietnamese-400-normal.woff2
+themes/Indigo/static/images/bg.svg
+themes/Indigo/static/js/main.js
+themes/Indigo/static/js/main.min.js
