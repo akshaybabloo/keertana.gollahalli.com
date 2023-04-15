@@ -8,8 +8,7 @@
 
 {{ if eq (getenv "HUGO_ENV") "production" }}
     <link rel="preload" href="/js/bootstrap.bundle.min.js" as="script">
-    <link rel="preload" href="/js/fontawesome.min.js" as="script">
-    <link rel="preload" href="/js/brands.min.js" as="script">
+    <link rel="preload" href="/js/main.min.js" as="script">
 {{ end }}
 
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
@@ -18,17 +17,16 @@
 <title>{{ if ne .Site.Title .Title }}{{.Title}} &mdash; {{ end }}{{.Site.Title}}</title>
 <link rel="canonical" href="{{.Permalink}}" />
 
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
 <link rel="icon" type="image/x-icon" sizes="16x16 32x32" href="/img/icons/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/favicon-180-precomposed.png">
 <link rel="manifest" href="/img/icons/manifest.json">
 <link rel="icon" sizes="192x192" href="/img/icons/favicon-192.png">
 
-{{ $sassTemplate := resources.Get "scss/custom.scss" }}
-{{ $style := $sassTemplate | resources.ExecuteAsTemplate "css/main.scss" . | resources.ToCSS | resources.Minify }}
-<link rel="stylesheet" href="{{ $style.Permalink }}">
+{{ if eq (getenv "HUGO_ENV") "production" }}
+<link rel="stylesheet" href="/css/main.min.css">
+{{ else }}
+<link rel="stylesheet" href="/css/main.css">
+{{ end }}
 
 {{ template "_internal/google_analytics.html" . }}
 {{ template "_internal/opengraph.html" . }}
