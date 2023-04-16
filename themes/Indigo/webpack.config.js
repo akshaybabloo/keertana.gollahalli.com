@@ -1,9 +1,9 @@
-// Generated using webpack-cli https://github.com/webpack/webpack-cli
-
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 const glob = require("glob");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
 
@@ -62,6 +62,25 @@ const config = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js"],
+  },
+  optimization: {
+    minimizer: [
+      new CssMinimizerPlugin(),
+    //   new ForkTsCheckerWebpackPlugin(),
+      new TerserPlugin()
+    ],
+    minimize: isProduction,
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          enforce: true,
+          chunks: 'all'
+        }
+      }
+    }
   },
 };
 

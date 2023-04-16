@@ -1,8 +1,12 @@
 {{/*<script src="/js/algoliasearch.umd.js"></script>*/}}
-<script src="/js/bootstrap.bundle.min.js"></script>
+{{/*<script src="/js/bootstrap.bundle.min.js"></script>*/}}
     {{ if eq (getenv "HUGO_ENV") "production" -}}
+        <script src="/js/vendors.min.js"></script>
+        <script src="/js/runtime.min.js"></script>
         <script src="/js/main.min.js"></script>
     {{ else -}}
+        <script src="/js/vendors.js"></script>
+        <script src="/js/runtime.js"></script>
         <script src="/js/main.js"></script>
     {{ end -}}
 {{/*<script src="/js/instantsearch.production.min.js"></script>*/}}

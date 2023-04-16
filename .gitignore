@@ -22,3 +22,10 @@ themes/Indigo/static/fonts/roboto-vietnamese-400-normal.woff2
 themes/Indigo/static/images/bg.svg
 themes/Indigo/static/js/main.js
 themes/Indigo/static/js/main.min.js
+themes/Indigo/static/css/vendors.css
+themes/Indigo/static/css/vendors.min.css
+themes/Indigo/static/js/runtime.js
+themes/Indigo/static/js/runtime.min.js
+themes/Indigo/static/js/vendors.js
+themes/Indigo/static/js/vendors.min.js
+themes/Indigo/static/js/vendors.min.js.LICENSE.txt
