@@ -24,7 +24,7 @@
     "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0",
     "mini-css-extract-plugin": "^2.7.6",
-    "postcss": "^8.4.28",
+    "postcss": "^8.4.29",
     "postcss-loader": "^7.3.3",
     "prettier": "^3.0.3",
     "purgecss": "^5.0.0",
