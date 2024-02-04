@@ -29,3 +29,11 @@ themes/Indigo/static/js/runtime.min.js
 themes/Indigo/static/js/vendors.js
 themes/Indigo/static/js/vendors.min.js
 themes/Indigo/static/js/vendors.min.js.LICENSE.txt
+
+/src/*.css
+app-*.es.js
+vendor-*.es.js
+app-*.css
+*.map
+*.woff*
+bg-*.svg

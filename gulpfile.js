@@ -25,10 +25,10 @@ function moveJs() {
     return src(jsFilesToMove).pipe(dest(jsFolderPath));
 }
 
-// Moves JS files to their appropriate location
-function moveFont() {
-    return src(fontFilesToMove).pipe(dest(fontPath));
-}
+// // Moves JS files to their appropriate location
+// function moveFont() {
+//     return src(fontFilesToMove).pipe(dest(fontPath));
+// }
 
 // Run both functions in parallel
-exports.default = parallel(moveCss, moveJs, moveFont);
+exports.default = parallel(moveCss, moveJs);

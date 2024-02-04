@@ -2,17 +2,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-{{ if eq (getenv "HUGO_ENV") "production" }}
-    <link rel="preload" href="/css/vendors.min.css" as="style">
-    <link rel="preload" href="/css/main.min.css" as="style">
-{{ end }}
-
-{{ if eq (getenv "HUGO_ENV") "production" }}
-    <link rel="preload" href="/js/vendors.min.js" as="script">
-    <link rel="preload" href="/js/runtime.min.js" as="script">
-    <link rel="preload" href="/js/main.min.js" as="script">
-{{ end }}
-
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
 <meta name="author" content="{{.Site.Params.title}}" />
 
@@ -23,14 +12,9 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/favicon-180-precomposed.png">
 <link rel="manifest" href="/img/icons/manifest.json">
 <link rel="icon" sizes="192x192" href="/img/icons/favicon-192.png">
+<link rel="icon" sizes="192x192" href="/img/icons/favicon-192.png">
 
-{{ if eq (getenv "HUGO_ENV") "production" }}
-<link rel="stylesheet" href="/css/vendors.min.css">
-<link rel="stylesheet" href="/css/main.min.css">
-{{ else }}
-<link rel="stylesheet" href="/css/vendors.css">
-<link rel="stylesheet" href="/css/main.css">
-{{ end }}
+{{ partial "main-script.html" }}
 
 {{ template "_internal/google_analytics.html" . }}
 {{ template "_internal/opengraph.html" . }}

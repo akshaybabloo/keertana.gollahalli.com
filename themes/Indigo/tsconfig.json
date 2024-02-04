@@ -13,5 +13,5 @@
     "node_modules",
     "dist"
   ],
-  "files": ["src/index.ts"]
+  "files": ["src/app.ts"]
 }
