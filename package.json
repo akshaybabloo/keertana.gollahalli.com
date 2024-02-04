@@ -17,9 +17,9 @@
     "gulp-cli": "^2.3.0"
   },
   "scripts": {
-    "build": "yarn workspace indigo build",
-    "build:dev": "yarn workspace indigo build:dev",
-    "build:prod": "yarn workspace indigo build:prod",
-    "watch": "yarn workspace indigo watch"
+    "build": "npm run build --workspace indigo",
+    "build:dev": "npm run build:dev --workspace indigo",
+    "build:prod": "npm run build:prod --workspace indigo",
+    "watch": "npm run watch --workspace indigo"
   }
 }
