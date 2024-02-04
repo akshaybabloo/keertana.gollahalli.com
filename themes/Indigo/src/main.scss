@@ -1,6 +1,6 @@
 @import "bootstrap/scss/bootstrap";
-//@import "../themes/Indigo/assets/scss/custom";
 
+$table-margin: 2em;
 
 body {
   background-image: url("../../../static/img/bg.svg");
@@ -50,5 +50,27 @@ a {
   color: white;
   &:hover {
     color: whitesmoke;
+  }
+}
+
+.footnotes {
+  p {
+    margin-bottom: 0;
+    overflow-wrap: break-word;
+  }
+}
+
+table {
+  margin-top: $table-margin;
+  margin-bottom: $table-margin;
+
+  @extend .table;
+  @extend .table-dark;
+}
+
+// Loop from 2 to 4 and get the value of $i
+@for $i from 2 through 4 {
+  h#{$i} {
+    margin-bottom: 1em;
   }
 }
