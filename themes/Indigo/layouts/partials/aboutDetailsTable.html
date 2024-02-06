@@ -1,39 +1,33 @@
-<table class="table table-dark table-borderless table-responsive">
-    <tbody>
+<ul class="timeline">
     {{ $present := where . "to" "Present" }}
     {{ range sort $present "from" "desc" }}
-        <tr class="gol-tr-bgcolor">
-            <td>{{ dateFormat "January, 2006" .from }} - {{ .to }}</td>
-            <td>
-                <strong>{{ .title }}</strong>
-                <p><em>{{ if .where }}{{ .where }},{{ end }} {{ .location }}</em></p>
-                {{ if .description }}
-                    <ul>
-                        {{ range .description }}
-                            <li>{{.}}</li>
-                        {{end}}
-                    </ul>
-                {{end}}
-            </td>
-        </tr>
+        <li class="timeline-item mb-5">
+            <p>{{ dateFormat "January, 2006" .from }} - {{ .to }}</p>
+            <h5>{{ .title }}</h5>
+            <p><em>{{ if .where }}{{ .where }},{{ end }} {{ .location }}</em></p>
+            {{ if .description }}
+                <ul>
+                    {{ range .description }}
+                        <li>{{.}}</li>
+                    {{end}}
+                </ul>
+            {{end}}
+        </li>
     {{ end }}
 
     {{ $noPresent := where . "to" "!=" "Present" }}
     {{ range sort $noPresent "from" "desc" }}
-        <tr>
-            <td>{{ dateFormat "January, 2006" .from }} - {{ dateFormat "January, 2006" .to }}</td>
-            <td>
-                <strong>{{ .title }}</strong>
-                <p><em>{{ if .where }}{{ .where }},{{ end }} {{ .location }}</em></p>
-                {{ if .description }}
-                    <ul>
-                        {{ range .description }}
-                            <li>{{.}}</li>
-                        {{end}}
-                    </ul>
+    <li class="timeline-item mb-5">
+        <p>{{ dateFormat "January, 2006" .from }} - {{ dateFormat "January, 2006" .to }}</p>
+        <h5>{{ .title }}</h5>
+        <p><em>{{ if .where }}{{ .where }},{{ end }} {{ .location }}</em></p>
+        {{ if .description }}
+            <ul>
+                {{ range .description }}
+                    <li>{{.}}</li>
                 {{end}}
-            </td>
-        </tr>
+            </ul>
+        {{end}}
+    </li>
     {{ end }}
-    </tbody>
-</table>
+</ul>
