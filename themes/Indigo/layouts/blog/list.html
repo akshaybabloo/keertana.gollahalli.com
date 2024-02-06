@@ -23,29 +23,26 @@
             {{$lenPages := len $pages}}
 
             {{ range $pageIndex, $pageElement := $pages }}
-                <article class="row mt-3">
-                    {{ if .Params.images }}
-                        <div class="row my-2">
-
-                            <div class="col-md-4 offset-md-4">
-                                <img src="{{ index .Params.images 0 }}" class="img-fluid" alt="{{.Title}}">
-                            </div>
+                <div class="card single_post bg-dark">
+                    <div class="body">
+                        {{ if .Params.images }}
+                        <div class="img-post">
+                         <a href="{{.RelPermalink}}"><img class="d-block img-fluid" src="{{ index .Params.images 0 }}" alt="{{.Title}}"></a>
                         </div>
-                    {{end}}
-
-                    <div class="col-md-3 my-2">
-                        {{ range .Params.categories }} <span class="badge bg-danger">#{{.}}</span> {{end}}
-                        <br>
-                        <small class="d-none">
-                            <time datetime="{{.PublishDate}}"
-                                  itemprop="datePublished">{{.PublishDate.Format "January 2, 2006"}}</time>
-                        </small>
-                    </div>
-                    <div class="col">
+                        {{end}}
                         <h2><a href="{{.RelPermalink}}">{{.Title}}</a></h2>
                         <p>{{.Description}}</p>
                     </div>
-                </article>
+                    <div class="footer">
+                        <div class="actions">
+                            <a href="{{.RelPermalink}}" class="btn btn-outline-success card-link strecthed-link">Continue Reading</a>
+                        </div>
+                        <ul class="stats">
+                            <li>{{ range .Params.categories }} <span class="badge bg-danger">#{{.}}</span> {{end}}</li>
+                            <li class="d-none"><time datetime="{{.PublishDate}}" class="text-white" itemprop="datePublished">{{.PublishDate.Format "January 2, 2006"}}</time></li>
+                        </ul>
+                    </div>
+                </div>
                 {{ if or (ne $lenPageGroup (add $pageGroupIndex 1)) (ne $lenPages (add $pageIndex 1)) }}
                     <hr>
                 {{end}}
