@@ -1,4 +1,7 @@
 <figure class="figure text-center {{with .Get "center"}}mx-auto d-block{{end}}">
-    <img src="{{ .Get "src" }}" class="figure-img img-fluid rounded" alt="{{ .Get "caption" }}" {{with .Get "width" }}width="{{.}}"{{end}} {{with .Get "height" }}height="{{.}}"{{end}}>
+
+    {{ $image := resources.Get (.Get "src") }}
+
+    <img src="{{$image.RelPermalink}}" class="figure-img img-fluid rounded" alt="{{ .Get "caption" }}" {{with .Get "width" }}width="{{.}}"{{end}} {{with .Get "height" }}height="{{.}}"{{end}}>
     <figcaption class="figure-caption text-white-50">{{ .Get "caption" }}</figcaption>
 </figure>
