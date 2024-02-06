@@ -5,7 +5,7 @@ draft: false
 categories: ["Dental Education"]
 tags: ["dentistry", "radiography", "radiation", "x-rays"]
 description: "Henry David Thoreau, the philosopher, once said, \"It's not what you look at that matters, it's what you see\". I say, however, while reading a radiograph, trust your eyes but believe in the unseen."
-images: ["/img/blog/radiograph-vs-radiation/radiograph-vs-radiation.png", "/img/blog/radiograph-vs-radiation/radiation-dosage.png", "/img/blog/radiograph-vs-radiation/cube.jpg"]
+images: ["/img/blog/radiograph-vs-radiation/radiograph-vs-radiation.png", "/img/blog/radiograph-vs-radiation/radiation_dosage.png", "/img/blog/radiograph-vs-radiation/coloured_cube.jpg"]
 ads: true
 # htmlScripts: []
 author:
@@ -33,7 +33,7 @@ When it comes to art, perspective is one of the most important aspects of creati
 
 Let's look at this picture, for example.
 
-{{< figure src="/img/blog/radiograph-vs-radiation/cube.jpg" caption="Man tossing cube" width="300" center="true" >}}
+{{< figure src="/img/blog/radiograph-vs-radiation/coloured_cube.jpg" caption="Man tossing cube" width="300" center="true" >}}
 
 If I asked you to describe to me what you see, you'll tell me it's the picture of a hand throwing a cube. How do you know it's a cube? That's an assumption. How do you know the hand is throwing the cube? That's perception. To some, it may look like the hand is about to catch the cube, to some, the hand is throwing the cube. That, my friends, is the difference in what something actually is vs what we perceive. The reason we need to address this concept is because it is fundamental in understanding radiography.
 
@@ -70,7 +70,7 @@ In addition to natural radiation, we are also exposed to human-made sources, aka
 
 What would also be helpful to know is how much radiation is too much radiation? The SI unit to measure equivalent dose (i.e., the correlation between absorbed dose to effective biological damage) is Sieverts (Sv) [^8]. The following image [^9] is an accurate representation of how insignificant dental x-rays are in terms of contributing to a person's annual radiation dose.
 
-{{< figure src="/img/blog/radiograph-vs-radiation/radiation-dosage.png" caption="Radiation dosage" width="600" center="true" >}}
+{{< figure src="/img/blog/radiograph-vs-radiation/radiation_dosage.png" caption="Radiation dosage" width="600" center="true" >}}
 
 Whereas, if we had to weight up the amount of radiation exposure from a few common types of radiographs in terms of background radiation, take a look at the following table [^6]:
 
