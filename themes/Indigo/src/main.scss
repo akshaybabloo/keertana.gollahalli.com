@@ -1,3 +1,6 @@
+$nav-link-font-size: 1.5em;
+$nav-link-font-weight: 600;
+
 @import "bootstrap/scss/bootstrap";
 
 $table-margin: 2em;
@@ -8,6 +11,7 @@ body {
   background-repeat: repeat;
   background-size: cover;
   background-color: #000000;
+  font-family: 'Roboto', sans-serif;
 }
 
 .bg-blur {

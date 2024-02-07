@@ -50,7 +50,7 @@ params:
   email: 'keertana@gollahalli.com'
   description: 'Hi! My name is Keertana, and I am just your friendly neighbourhood Dentist (or maybe slightly far away, at the end of the world)'
   cloudflareInsight: '107cda45c47644b4bf2d025b603af92d'
-  year: '2023'
+  year: '2024'
   author:
     city: 'Auckland'
     country: 'New Zealand'
