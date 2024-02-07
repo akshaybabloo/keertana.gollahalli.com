@@ -1,7 +1,7 @@
 {{ $currentPage := . }}
 
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-blur {{if .IsHome}}fixed-top{{end}} border-dark border-bottom" aria-label="Navigation bar">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-blur {{if .IsHome}}fixed-top{{end}} border-dark border-bottom py-3" aria-label="Navigation bar">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
                     aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,7 +9,7 @@
             </button>
 
             <div class="collapse navbar-collapse justify-content-md-center" id="navbar">
-                <ul class="navbar-nav h4">
+                <ul class="navbar-nav">
                     {{ range .Site.Menus.main }}
                         <li class="nav-item">
                             <a class="nav-link {{ if $currentPage.IsMenuCurrent "main" . }}active{{end}}" aria-current="page" href="{{ .URL }}">{{ .Name }}</a>
