@@ -22,7 +22,7 @@
     "postcss-import": "^16.1.0",
     "prettier": "^3.2.4",
     "sass": "^1.75.0",
-    "typescript": "^5.4.4",
+    "typescript": "^5.4.5",
     "vite": "^5.2.8"
   },
   "scripts": {
