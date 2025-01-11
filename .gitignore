@@ -11,6 +11,7 @@ yarn-error.log
 /dist/
 themes/Indigo/static/css/main.css
 themes/Indigo/static/css/main.min.css
+themes/Indigo/static/css/*.min.css
 themes/Indigo/static/fonts/roboto-all-400-normal.woff
 themes/Indigo/static/fonts/roboto-cyrillic-400-normal.woff2
 themes/Indigo/static/fonts/roboto-cyrillic-ext-400-normal.woff2
@@ -29,6 +30,7 @@ themes/Indigo/static/js/runtime.min.js
 themes/Indigo/static/js/vendors.js
 themes/Indigo/static/js/vendors.min.js
 themes/Indigo/static/js/vendors.min.js.LICENSE.txt
+themes/Indigo/static/js/*.min.js
 
 /src/*.css
 app-*.es.js
