@@ -6,9 +6,27 @@ updates:
     interval: daily
     time: "17:00"
   open-pull-requests-limit: 10
+  groups:
+    fontawesome:
+      applies-to: version-updates
+      patterns:
+        - "@fortawesome*"
+      update-types:
+        - "major"
+        - "minor"
+        - "patch"
 - package-ecosystem: npm
   directory: "/themes/Indigo"
   schedule:
     interval: daily
     time: "17:00"
   open-pull-requests-limit: 10
+  groups:
+    fontawesome:
+      applies-to: version-updates
+      patterns:
+        - "@fortawesome*"
+      update-types:
+        - "major"
+        - "minor"
+        - "patch"
