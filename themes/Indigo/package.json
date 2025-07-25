@@ -9,7 +9,7 @@
   "private": true,
   "dependencies": {
     "@fontsource/roboto": "^5.2.5",
-    "bootstrap": "^5.3.6"
+    "bootstrap": "^5.3.7"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^7.0.0",
