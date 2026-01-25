@@ -42,6 +42,7 @@ outputs:
     - 'AMP'
 
 params:
+  logo: '/img/logo.svg'
   title: 'Dr Keertana Tipparaju Gollahalli'
   images:
     - 'img/keertana-photo.jpg'

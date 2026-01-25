@@ -5,7 +5,6 @@ draft: false
 menu: "main"
 type: about
 ---
-# About
 
 Hi! My name is Dr Keertana and I am a Dentist. I know, eww right? Who likes to stare into someone’s mouth for a living? But that is what I would like to address on my page. Everything Dentistry! From the why’s and how’s to the what’s and if’s.  
 

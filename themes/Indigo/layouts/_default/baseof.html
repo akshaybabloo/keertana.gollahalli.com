@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="{{ .Site.LanguageCode }}" class="h-full scroll-smooth">
 <head>
     {{- partial "head.html" . -}}
-    {{- block "head" . }}{{- end }}
 </head>
-<body>
-{{- partial "nav.html" . -}}
-{{- block "main" . }}{{- end }}
-{{- partial "footer.html" . -}}
-{{- partial "scripts.html" . -}}
+<body class="flex flex-col min-h-screen bg-[#faf9f6] text-slate-800 antialiased selection:bg-amber-100 selection:text-amber-900">
+    
+    {{- partial "nav.html" . -}}
+
+    <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {{- block "main" . }}{{- end }}
+    </main>
+
+    {{- partial "footer.html" . -}}
+
+    {{- partial "scripts.html" . -}}
 </body>
 </html>

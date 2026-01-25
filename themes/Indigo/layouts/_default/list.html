@@ -1,0 +1,105 @@
+{{ define "main" }}
+<div class="space-y-16">
+    <!-- Page Header -->
+    <div class="text-center max-w-3xl mx-auto border-b border-slate-200 pb-12">
+        <h1 class="text-4xl md:text-5xl font-serif font-bold text-slate-900 mb-4">
+            {{ .Title }}
+        </h1>
+        {{ if .Content }}
+        <div class="text-lg text-slate-600 font-light italic">
+            {{ .Content }}
+        </div>
+        {{ end }}
+    </div>
+
+    <!-- Blog Posts Loop -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-16">
+        {{ range $index, $element := .Paginator.Pages }}
+            
+            {{/* Featured Post Logic: Only the first post on the first page */}}
+            {{ if and (eq $.Paginator.PageNumber 1) (eq $index 0) }}
+                <article class="md:col-span-3 grid md:grid-cols-2 gap-10 items-center mb-8 pb-16 border-b border-slate-200 group">
+                    {{ $image := "" }}
+                    {{ if .Params.images }}
+                        {{ $image = index .Params.images 0 }}
+                    {{ else if .Params.image }}
+                        {{ $image = .Params.image }}
+                    {{ end }}
+
+                    {{ if $image }}
+                    <div class="overflow-hidden rounded-2xl shadow-sm">
+                        <a href="{{ .Permalink }}">
+                            <img src="{{ $image }}" alt="{{ .Title }}" class="w-full h-full object-contain aspect-video bg-white transform group-hover:scale-105 transition-transform duration-700">
+                        </a>
+                    </div>
+                    {{ end }}
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-3">
+                            <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-widest rounded-full">Featured</span>
+                            <span class="text-slate-500 text-xs font-bold uppercase tracking-widest">{{ .Date.Format "January 2, 2006" }}</span>
+                        </div>
+                        
+                        <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 leading-tight">
+                            <a href="{{ .Permalink }}" class="hover:text-amber-700 hover:underline transition-colors decoration-amber-700/50 underline-offset-4">
+                                {{ .Title }}
+                            </a>
+                        </h2>
+                        
+                        <p class="text-slate-600 text-lg leading-relaxed">
+                            {{ .Summary | truncate 250 }}
+                        </p>
+                        
+                        <div class="pt-2">
+                            <a href="{{ .Permalink }}" class="inline-flex items-center text-slate-900 font-bold border-b-2 border-amber-500 pb-1 hover:text-amber-700 hover:border-amber-700 transition-all">
+                                Read Full Article
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            
+            {{/* Standard Grid Posts */}}
+            {{ else }}
+                <article class="group flex flex-col h-full">
+                    {{ $image := "" }}
+                    {{ if .Params.images }}
+                        {{ $image = index .Params.images 0 }}
+                    {{ else if .Params.image }}
+                        {{ $image = .Params.image }}
+                    {{ end }}
+
+                    {{ if $image }}
+                    <div class="overflow-hidden rounded-xl mb-5 shadow-sm">
+                        <a href="{{ .Permalink }}">
+                            <img src="{{ $image }}" alt="{{ .Title }}" class="w-full aspect-[3/2] object-contain bg-white transform group-hover:scale-105 transition-transform duration-500">
+                        </a>
+                    </div>
+                    {{ end }}
+                    
+                    <div class="flex flex-col flex-1">
+                        <div class="text-xs font-bold text-amber-700 uppercase tracking-widest mb-2">
+                            {{ .Date.Format "Jan 02, 2006" }}
+                        </div>
+                        
+                        <h3 class="text-xl font-serif font-bold text-slate-900 mb-3 leading-snug">
+                            <a href="{{ .Permalink }}" class="hover:text-amber-700 hover:underline transition-colors decoration-amber-700/50 underline-offset-4">
+                                {{ .Title }}
+                            </a>
+                        </h3>
+                        
+                        <p class="text-slate-600 text-sm leading-relaxed line-clamp-3 mb-4">
+                            {{ .Summary }}
+                        </p>
+                        
+                        <a href="{{ .Permalink }}" class="inline-flex items-center text-base font-bold text-slate-900 border-b-2 border-amber-500 pb-0.5 hover:text-amber-800 hover:border-amber-800 transition-all mt-auto group/link">
+                            Read more <span class="ml-1 transform group-hover/link:translate-x-1 transition-transform">&rarr;</span>
+                        </a>
+                    </div>
+                </article>
+            {{ end }}
+        {{ end }}
+    </div>
+
+    {{ partial "pagination.html" . }}
+</div>
+{{ end }}

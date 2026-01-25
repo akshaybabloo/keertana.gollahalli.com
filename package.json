@@ -10,15 +10,14 @@
   "workspaces": [
     "themes/Indigo"
   ],
-  "dependencies": {
-  },
-  "devDependencies": {
-    "gulp": "^5.0.1",
-    "gulp-cli": "^3.0.0"
-  },
   "scripts": {
-    "build:dev": "npm run build:dev --workspace indigo",
-    "build:prod": "npm run build:prod --workspace indigo",
-    "watch": "npm run watch --workspace indigo"
+    "build:dev": "pnpm --filter indigo run build:dev",
+    "build:prod": "pnpm --filter indigo run build:prod",
+    "script": "gulp",
+    "watch": "pnpm --filter indigo run watch"
+  },
+  "dependencies": {
+    "@fontsource/lato": "^5.2.7",
+    "@fontsource/playfair-display": "^5.2.8"
   }
 }

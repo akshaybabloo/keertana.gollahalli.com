@@ -1,22 +1,63 @@
-{{ $currentPage := . }}
-
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-blur {{if .IsHome}}fixed-top{{end}} border-dark border-bottom py-3" aria-label="Navigation bar">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
-                    aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-md-center" id="navbar">
-                <ul class="navbar-nav">
-                    {{ range .Site.Menus.main }}
-                        <li class="nav-item">
-                            <a class="nav-link {{ if $currentPage.IsMenuCurrent "main" . }}active{{end}}" aria-current="page" href="{{ .URL }}">{{ .Name }}</a>
-                        </li>
+<nav class="bg-[#faf9f6]/90 backdrop-blur-sm sticky top-0 z-50 border-b border-slate-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <!-- Logo Section -->
+            <div class="flex-shrink-0 flex items-center">
+                <a href="{{ .Site.BaseURL }}" class="flex items-center gap-3 group">
+                    {{ if .Site.Params.logo }}
+                        <img class="h-10 w-auto opacity-90 group-hover:opacity-100 transition-opacity" src="{{ .Site.Params.logo }}" alt="{{ .Site.Title }}">
                     {{ end }}
-                </ul>
+                </a>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex md:items-center md:space-x-10">
+                {{ range .Site.Menus.main }}
+                <a href="{{ .URL }}" class="text-slate-600 hover:text-amber-700 py-2 text-sm font-bold uppercase tracking-widest transition-colors duration-300 border-b-2 border-transparent hover:border-amber-700/50 {{ if $.IsMenuCurrent "main" . }}text-amber-700 border-amber-700{{ end }}">
+                    {{ .Name }}
+                </a>
+                {{ end }}
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center md:hidden">
+                <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-slate-500 hover:text-slate-800 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
             </div>
         </div>
-    </nav>
-</header>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="hidden md:hidden bg-white border-b border-slate-100 absolute w-full" id="mobile-menu">
+        <div class="px-4 pt-4 pb-6 space-y-2">
+            {{ range .Site.Menus.main }}
+            <a href="{{ .URL }}" class="block px-3 py-3 rounded-lg text-base font-medium text-slate-600 hover:text-amber-700 hover:bg-amber-50/50 {{ if $.IsMenuCurrent "main" . }}text-amber-700 bg-amber-50{{ end }}">
+                {{ .Name }}
+            </a>
+            {{ end }}
+        </div>
+    </div>
+</nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.querySelector('.mobile-menu-button');
+        const menu = document.querySelector('#mobile-menu');
+        
+        if(btn && menu) {
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                const icon = btn.querySelector('i');
+                if (menu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+        }
+    });
+</script>

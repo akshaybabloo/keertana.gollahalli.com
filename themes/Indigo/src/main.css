@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* A deep, professional slate for primary text/headings */
+  --color-primary: #334155; 
+  /* A refined gold/bronze for accents - sophisticated, not flashy */
+  --color-accent: #b45309; 
+  
+  --font-sans: "Lato", sans-serif;
+  --font-serif: "Playfair Display", serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  /* Creamy/Off-white background for a 'paper' feel, easier on eyes than pure white */
+  @apply bg-[#faf9f6] text-slate-800;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+}
+
+/* Custom Link Styles for Prose to avoid "highlight all on container hover" issue */
+.prose a {
+  @apply text-amber-700 no-underline transition-all duration-200 border-b border-transparent;
+}
+
+.prose a:hover {
+  @apply text-amber-900 border-amber-900;
+}

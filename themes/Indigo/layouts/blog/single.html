@@ -3,32 +3,52 @@
 {{ end }}
 
 {{ define "main" }}
-    <main class="container rounded-sm-3 bg-dark text-white my-5 p-4 fs-6">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>{{.Title}}</h1>
-                <p><small class="text-white-50"><time datetime="{{.PublishDate}}" itemprop="datePublished">{{.PublishDate.Format "January 2, 2006"}}</time> &bullet; {{ range .Params.tags }}
-                            <a class="badge text-bg-secondary fw-bold text-decoration-none" href="{{ `/tags/` | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{ end }}
-                        &bullet; {{ .ReadingTime }} minutes to read</small></p>
-            </div>
+<article class="max-w-7xl mx-auto bg-white rounded-none md:rounded-3xl shadow-sm md:shadow-xl overflow-hidden">
+    <!-- Article Header -->
+    <header class="p-8 md:p-12 text-center border-b border-slate-100">
+        <div class="flex items-center justify-center gap-4 text-xs font-bold tracking-widest uppercase text-amber-700 mb-6">
+            <time datetime="{{ .PublishDate }}">{{ .PublishDate.Format "January 2, 2006" }}</time>
+            <span>&bull;</span>
+            <span>{{ .ReadingTime }} min read</span>
         </div>
-        {{ if .Params.images }}
-            <div class="row">
-                <div class="col px-0 text-center">
-                    <img src="{{ index .Params.images 0 }}" class="img-fluid" alt="{{.Title}}">
-                </div>
-            </div>
-        {{end}}
-        <div class="row">
-            <div class="col-md-12">
-                <p class="lh-base">{{.Content}}</p>
-            </div>
+        
+        <h1 class="text-4xl md:text-6xl font-serif font-bold text-slate-900 mb-8 leading-tight">
+            {{ .Title }}
+        </h1>
+
+        {{ if .Params.tags }}
+        <div class="flex flex-wrap justify-center gap-2">
+            {{ range .Params.tags }}
+            <a href="{{ `/tags/` | relLangURL }}{{ . | urlize }}" class="px-3 py-1 bg-slate-50 text-slate-600 hover:text-amber-700 hover:bg-amber-50 text-xs font-bold uppercase tracking-wider rounded-full transition-colors">
+                #{{ . }}
+            </a>
+            {{ end }}
         </div>
-        <hr>
-        <div class="row pt-5">
-            <div class="col-md-12">
-                {{ template "_internal/disqus.html" . }}
-            </div>
+        {{ end }}
+    </header>
+
+    <!-- Featured Image -->
+    {{ if .Params.images }}
+    <div class="w-full bg-slate-50 border-b border-slate-100">
+        <div class="container mx-auto px-0 md:px-12 py-8">
+            <img src="{{ index .Params.images 0 }}" class="block w-full h-auto max-h-[600px] object-contain mx-auto shadow-sm rounded-lg" alt="{{.Title}}">
         </div>
-    </main>
+    </div>
+    {{ end }}
+
+    <!-- Article Content -->
+    <div class="p-8 md:p-12">
+        <div class="prose prose-slate prose-lg max-w-none 
+            prose-headings:font-serif prose-headings:font-bold prose-headings:text-slate-900
+            prose-img:rounded-xl prose-img:shadow-md prose-img:mx-auto
+            prose-blockquote:border-l-4 prose-blockquote:border-amber-500 prose-blockquote:bg-amber-50/30 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic">
+            {{ .Content }}
+        </div>
+    </div>
+
+    <!-- Comments -->
+    <div class="bg-[#faf9f6] p-8 md:p-12 border-t border-slate-200">
+        {{ template "_internal/disqus.html" . }}
+    </div>
+</article>
 {{ end }}
