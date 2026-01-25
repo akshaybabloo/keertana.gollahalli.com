@@ -1,0 +1,6 @@
+packages:
+  - themes/Indigo
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - esbuild
