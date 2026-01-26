@@ -12,5 +12,8 @@
     "build:prod": "pnpm --filter indigo run build:prod",
     "script": "gulp",
     "watch": "pnpm --filter indigo run watch"
+  },
+  "devDependencies": {
+    "wrangler": "^4.60.0"
   }
 }
