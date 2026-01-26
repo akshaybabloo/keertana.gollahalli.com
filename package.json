@@ -7,17 +7,10 @@
   "author": "Akshay Raj Gollahalli <akshay@gollahalli.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "themes/Indigo"
-  ],
   "scripts": {
     "build:dev": "pnpm --filter indigo run build:dev",
     "build:prod": "pnpm --filter indigo run build:prod",
     "script": "gulp",
     "watch": "pnpm --filter indigo run watch"
-  },
-  "dependencies": {
-    "@fontsource/lato": "^5.2.7",
-    "@fontsource/playfair-display": "^5.2.8"
   }
 }
