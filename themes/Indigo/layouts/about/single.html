@@ -3,41 +3,53 @@
 {{ end }}
 
 {{ define "main" }}
-    <main class="container rounded-sm-3 bg-dark text-white my-5 p-4 fs-6">
-        <div class="row bg-dark text-white">
-            <div class="col-md-12">
-                <p class="lh-base">{{.Content}}</p>
-            </div>
+<div class="space-y-16 max-w-5xl mx-auto">
+    <!-- Intro / Bio -->
+    <section>
+        <div class="prose prose-slate prose-lg max-w-none text-slate-600 
+            prose-headings:font-serif prose-headings:text-slate-900 
+            prose-p:leading-loose">
+            <h1 class="font-serif text-4xl md:text-5xl font-bold text-slate-900 mb-8 border-b border-slate-200 pb-6">About Me</h1>
+            {{ .Content }}
         </div>
-        <div class="row mt-4">
-            <div class="col-md-12">
-                {{ range $k, $i := .Site.Data.Experience }}
-                    <h2>{{$k}}</h2>
-                    {{ partial "aboutDetailsTable.html" . }}
-                {{ end }}
-            </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-md-12">
+    </section>
 
-                {{ range $k, $i := .Site.Data.Certification }}
-                    <h2>{{$k}}</h2>
-                    <ul>
-                        {{ range . }}
-                            <li>{{.}}</li>
-                        {{end}}
-                    </ul>
-                {{ end }}
+    <!-- Experience -->
+    <section>
+        <h2 class="text-3xl font-serif font-bold text-slate-900 mb-8 flex items-center">
+            <span class="text-amber-700 mr-4 opacity-80"><i class="fas fa-briefcase"></i></span>
+            Experience
+        </h2>
+        {{ partial "aboutDetailsTable.html" .Site.Data.Experience.Experience }}
+    </section>
 
+    <div class="grid md:grid-cols-2 gap-12">
+        <!-- Education -->
+        <section>
+            <h2 class="text-3xl font-serif font-bold text-slate-900 mb-8 flex items-center">
+                <span class="text-amber-700 mr-4 opacity-80"><i class="fas fa-graduation-cap"></i></span>
+                Education
+            </h2>
+            {{ partial "aboutDetailsTable.html" .Site.Data.Education.Education }}
+        </section>
+
+        <!-- Certifications -->
+        <section>
+            <h2 class="text-3xl font-serif font-bold text-slate-900 mb-8 flex items-center">
+                <span class="text-amber-700 mr-4 opacity-80"><i class="fas fa-certificate"></i></span>
+                Certifications
+            </h2>
+            <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
+                <ul class="space-y-4">
+                    {{ range .Site.Data.Certification.Certification }}
+                        <li class="flex items-start">
+                            <span class="text-amber-600 mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <span class="text-slate-700 font-medium leading-relaxed">{{.}}</span>
+                        </li>
+                    {{ end }}
+                </ul>
             </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-12">
-                {{ range $k, $i := .Site.Data.Education }}
-                    <h2>{{$k}}</h2>
-                    {{ partial "aboutDetailsTable.html" . }}
-                {{ end }}
-            </div>
-        </div>
-    </main>
+        </section>
+    </div>
+</div>
 {{ end }}

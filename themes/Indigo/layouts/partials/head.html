@@ -8,6 +8,22 @@
 <title>{{ if ne .Site.Title .Title }}{{.Title}} &mdash; {{ end }}{{.Site.Title}}</title>
 <link rel="canonical" href="{{.Permalink}}" />
 
+{{ if .Params.noIndex }}
+<meta name="robots" content="noindex">
+{{ end }}
+{{ if and .Site.Params.seo.noIndexTags (eq .Type "tags") }}
+<meta name="robots" content="noindex">
+{{ end }}
+{{ if and .Site.Params.seo.noIndexCategories (eq .Type "categories") }}
+<meta name="robots" content="noindex">
+{{ end }}
+
+{{ if .Params.keywords }}
+<meta name="keywords" content="{{ delimit .Params.keywords ", " }}" />
+{{ else if .Params.tags }}
+<meta name="keywords" content="{{ delimit .Params.tags ", " }}" />
+{{ end }}
+
 <link rel="icon" type="image/x-icon" sizes="16x16 32x32" href="/img/icons/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/favicon-180-precomposed.png">
 <link rel="manifest" href="/img/icons/manifest.json">

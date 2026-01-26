@@ -7,18 +7,13 @@
   "author": "Akshay Raj Gollahalli <akshay@gollahalli.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "themes/Indigo"
-  ],
-  "dependencies": {
+  "scripts": {
+    "build:dev": "pnpm --filter indigo run build:dev",
+    "build:prod": "pnpm --filter indigo run build:prod",
+    "script": "gulp",
+    "watch": "pnpm --filter indigo run watch"
   },
   "devDependencies": {
-    "gulp": "^5.0.1",
-    "gulp-cli": "^3.0.0"
-  },
-  "scripts": {
-    "build:dev": "npm run build:dev --workspace indigo",
-    "build:prod": "npm run build:prod --workspace indigo",
-    "watch": "npm run watch --workspace indigo"
+    "wrangler": "^4.60.0"
   }
 }
