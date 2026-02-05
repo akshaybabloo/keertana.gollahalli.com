@@ -14,6 +14,6 @@
     "watch": "pnpm --filter indigo run watch"
   },
   "devDependencies": {
-    "wrangler": "^4.60.0"
+    "wrangler": "^4.63.0"
   }
 }
