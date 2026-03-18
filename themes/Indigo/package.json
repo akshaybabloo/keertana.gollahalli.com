@@ -11,7 +11,7 @@
     "@fontsource/lato": "^5.2.7",
     "@fontsource/playfair-display": "^5.2.8",
     "@tailwindcss/vite": "^4.1.18",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",
