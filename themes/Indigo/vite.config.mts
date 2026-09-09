@@ -72,7 +72,7 @@ export default defineConfig(({mode}) => {
         build: {
             sourcemap: true,
             minify: mode === 'production',
-            outDir: resolve(__dirname, 'static'),
+            outDir: resolve(import.meta.dirname, 'static'),
             emptyOutDir: false,
             rollupOptions: {
                 output: {
@@ -91,7 +91,7 @@ export default defineConfig(({mode}) => {
                     entryFileNames: 'js/[name]-[hash].[format].js',
                 },
                 input: {
-                    app: resolve(__dirname, 'layouts/partials/main-script.html'),
+                    app: resolve(import.meta.dirname, 'layouts/partials/main-script.html'),
                 },
             }
         }
