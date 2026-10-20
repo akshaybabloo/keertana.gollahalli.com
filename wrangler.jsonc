@@ -5,7 +5,7 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "keertana-gollahalli-com-2",
-	"compatibility_date": "2025-09-27",
+	"compatibility_date": "2028-04-30",
 	"assets": {
 		"directory": "./public"
 	},
