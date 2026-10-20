@@ -15,22 +15,24 @@
     "build": {
         "command": "pnpm install && pnpm run build:prod && hugo --gc --minify"
     },
-    "env": {
+	"vars": {
+		"HUGO_ENV": "production",
+		"HUGO_VERSION": "0.168.0",
+	},
+	"env": {
+		"staging": {
+			"vars": {
+				"HUGO_ENV": "production",
+				"HUGO_VERSION": "0.168.0"
+			}
+		},
 		"production": {
 			"vars": {
 				"HUGO_ENV": "production",
-				"HUGO_VERSION": "0.168.0",
-				"NODE_VERSION": "24.13.0",
-			}
-		},
-		"development": {
-			"vars": {
-				"HUGO_ENV": "production",
-				"HUGO_VERSION": "0.168.0",
-				"NODE_VERSION": "24.13.0",
+				"HUGO_VERSION": "0.168.0"
 			}
 		}
-    }
+	}
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
