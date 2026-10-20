@@ -19,14 +19,14 @@
 		"production": {
 			"vars": {
 				"HUGO_ENV": "production",
-				"HUGO_VERSION": "0.154.5",
+				"HUGO_VERSION": "0.168.0",
 				"NODE_VERSION": "24.13.0",
 			}
 		},
 		"development": {
 			"vars": {
 				"HUGO_ENV": "production",
-				"HUGO_VERSION": "0.154.5",
+				"HUGO_VERSION": "0.168.0",
 				"NODE_VERSION": "24.13.0",
 			}
 		}
